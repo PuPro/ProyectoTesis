@@ -20,15 +20,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-<<<<<<< HEAD
-		$this->load->view('header');
-                $this->load->view('loguin');
-                $this->load->view('trabajador');
+
+		$this->load->view('header');       
+                $this->load->view('menuUsuario');
+                $this->load->view('flujoCaja');
                 $this->load->view('footer');
                 
-                
-=======
-		$this->load->view('welcome_message');
->>>>>>> origin/master
+
 	}
 }

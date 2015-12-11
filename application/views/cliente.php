@@ -1,6 +1,5 @@
 <div class="container">
-    <h2 class="btn btn-lg btn-primary btn-block">TRABAJADORES</h2>
-    <!-- inicio menu add Trabajador -->
+    <h2 class="btn btn-lg btn-primary btn-block">CLIENTE</h2>
     <h2></h2>
     <div class="col-sm-12">   
         <div class="panel panel-default" >
@@ -9,15 +8,16 @@
                     <div class="col-sm-6">
                         <label for="concept" class="col-sm-3 control-label">Rut *:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="DireccionTrabajador" name="RutTrabajador" 
+                            <input type="text" class="form-control" id="RutCliente" 
+                                   name="RutCliente" 
                                    placeholder="Ingrese Rut..." required="true">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <label for="date" class="col-sm-3 control-label">Nombre(s) *:</label>
+                        <label for="concept" class="col-sm-3 control-label">Nombre(s) *:</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" placeholder="Ingrese nombre..."
-                                   id="NombreTrabajador" name="NombreTrabajador" required="true">
+                                   id="NombreCliente" name="NombreCliente" required="true">
                         </div>
                     </div>
                 </div>                               
@@ -25,8 +25,8 @@
                     <div class="col-sm-6">
                         <label for="concept" class="col-sm-3 control-label">Apellido(s) *:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ApellidoTrabajador" 
-                                   name="ApellidoTrabajador" 
+                            <input type="text" class="form-control" id="ApellidoCliente" 
+                                   name="ApellidoCliente" 
                                    placeholder="Ingrese un apellido(s)..." required="true">
                         </div>
                     </div>
@@ -34,8 +34,8 @@
                     <div class="col-sm-6">
                         <label for="concept" class="col-sm-3 control-label">Telefono :</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="TelefonoTrabajador" 
-                                   name="TelefonoTrabajador" 
+                            <input type="text" class="form-control" id="TelefonoCliente" 
+                                   name="TelefonoCliente" 
                                    placeholder="Ingrese un teléfono..." required="true">
                         </div>
                     </div>
@@ -45,34 +45,32 @@
                         <label for="date" class="col-sm-3 control-label">Fecha de ingreso *:</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control" 
-                                   id="Fecha_ingresoTrabajador" name="Fecha_ingresoTrabajador" required="true">
+                                   id="Fecha_ingresoCliente" name="Fecha_ingresoCliente" required="true">
                         </div>
                     </div>        
                     <div class="col-sm-6">
                         <label for="concept" class="col-sm-3 control-label">Dirección *:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="DireccionTrabajador" 
-                                   name="DireccionTrabajador" 
+                            <input type="text" class="form-control" id="DireccionCliente" 
+                                   name="DireccionCliente" 
                                    placeholder="Ingrese una dirección..." required="true">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label for="status" class="col-sm-3 control-label">Estado *:</label>
+                        <label for="status" class="col-sm-3 control-label">Región *:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="EstadoTrabajador" name="EstadoTrabajador" required="true">
-                                <option value="">Seleccione estado...</option>
-                                <option>Activo</option>
-                                <option>Inactivo</option>
+                            <select class="form-control" id="RegionCliente" name="RegionCliente" 
+                                    required="true">
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <label for="status" class="col-sm-3 control-label">Cargo *:</label>
+                        <label for="status" class="col-sm-3 control-label">Comuna *:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="CargoTrabajador" 
-                                    name="CargoTrabajador" required="true">
+                            <select class="form-control" id="ComunaCliente" 
+                                    name="ComunaCliente" required="true">
                             </select>
                         </div>
                     </div>
@@ -82,8 +80,8 @@
                     <div class="col-sm-6">
                         <label for="status" class="col-sm-3 control-label">Sucursal *:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="SucursalTrabajador" 
-                                    name="SucursalTrabajador" required="true">
+                            <select class="form-control" id="SucursalCliente" 
+                                    name="SucursalCliente" required="true">
                             </select>
                         </div>
                     </div>
@@ -94,24 +92,25 @@
                         <p class= "help-block">* Campos Obligatorios</p>
                     </div>
                     <div class="col-sm-9 text-right">
-                        <button type="submit" id="btnagregarTrabajador" 
+                        <button type="submit" id="btnagregarCliente" 
                                 class="btn btn-default preview-add-button"><span class="glyphicon glyphicon-plus" ></span> AGREGAR
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>  
-</div> <!-- / fin menu -->     
+    </div>    
+</div> 
 
-<div class="container ">
-    <div class="col-sm-12 "> 
+
+<div class="container">
+    <div class="col-sm-12"> 
         <h2></h2>
         <!--busqueda-->
         <div class="row">
             <div class="panel panel-primary filterable">
                 <div class="panel-heading">
-                    <h3 class="panel-title">TRABAJADORES</h3>
+                    <h3 class="panel-title">CLIENTES</h3>
                     <div class="pull-right">
                         <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> BUSCAR </button>
                     </div>
@@ -121,11 +120,11 @@
                         <th><input type="text" class="form-control" placeholder="Rut" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Nombres" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Apellidos" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Telefono" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Direccion" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Telefono" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Fecha ingreso" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Estado" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Cargo" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Ciudad" disabled></th>
+
 
                     </tr>
                     <tr>
@@ -135,32 +134,33 @@
                         <td>99999999</td>
                         <td>jd # 12</td>
                         <td>12/12/12</td>
-                        <td>activo</td>
-                        <td>supervisor</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>ventana</td>
-                        <td>metal</td>
-                        <td>2</td>
-                        <td>ventana</td>
-                        <td>metal</td>
-                        <td>ventana</td>
-                        <td>metal</td>
+                        <td>talca</td>
 
                     </tr>
                     <tr>
-                        <td>3</td>
-                        <td>reja</td>
-                        <td>fierro</td>
-                        <td>fierro</td>
-                        <td>3</td>
-                        <td>reja</td>
-                        <td>fierro</td>
-                        <td>fierro</td>
+                        <td>12345678-9</td>
+                        <td>jose jose</td>
+                        <td>madera madera</td>
+                        <td>99999999</td>
+                        <td>jd # 12</td>
+                        <td>12/12/12</td>
+                        <td>talca</td>
+
+
+                    </tr>
+                    <tr>
+                        <td>12345678-9</td>
+                        <td>jose jose</td>
+                        <td>madera madera</td>
+                        <td>99999999</td>
+                        <td>jd # 12</td>
+                        <td>12/12/12</td>
+                        <td>talca</td>
+
                     </tr>
                 </table>
             </div>
         </div>
     </div>
+</div>
 
