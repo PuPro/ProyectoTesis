@@ -1,9 +1,5 @@
 $(document).ready(function () {
 
-    //Carga de combobox
-    cargaCargo();
-    cargaSucursal();
-
 
     $("#btnagregarTrabajador").button().click(function () {
         btnaagregartrabajador()
@@ -132,6 +128,7 @@ function validaLogin() {
             function (pagina, datos) {
                 //Carga archivos de respuestas que provengan de validaLogin
                 $("#content").html(pagina, datos);
+
                 $(".menuUsuario").hide();
                 $(".menuUsuario").fadeIn(1000).delay(1000);
                 $("#btnIniciar").button().click(function () {
@@ -160,20 +157,25 @@ function botonLogin() {
 
 
 function trabajador() {
-    
+
     $.post(
             base_url + "Welcome/VistaTrabajador",
             {},
             function (pagina) {
+                //Carga de combobox
+                cargaCargo();
+                cargaSucursal();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
+
+
             });
 }
 
 function cliente() {
-    
+
     $.post(
             base_url + "Welcome/VistaCliente",
             {},
