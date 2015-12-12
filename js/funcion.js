@@ -1,13 +1,10 @@
 $(document).ready(function () {
-    
-    $("#btnLoguin").button().click(function (){
-        $("#menu").show();
-    });
+
+    //Carga de combobox
     cargaCargo();
     cargaSucursal();
-    $("#btnnuevoTrabajador").button().click(function () {
-        btnuevotrabajador()
-    });
+
+
     $("#btnagregarTrabajador").button().click(function () {
         btnaagregartrabajador()
     });
@@ -55,22 +52,10 @@ $(document).ready(function () {
         }
     });
 
+    validaLogin();
+
 });
 
-
-function btnuevotrabajador() {
-    $("#RutTrabajador").attr("readonly", false);
-    $("#NombresTrabajador").attr("readonly", false);
-    $("#ApellidosTrabajador").attr("readonly", false);
-    $("#TelefonoTrabajador").attr("readonly", false);
-    $("#DireccionTrabajador").attr("readonly", false);
-    $("#Fecha_ingresoTrabajador").attr("readonly", false);
-    $("#EstadoTrabajador").attr("disabled", false);
-    $("#CargoTrabajador").attr("disabled", false);
-    $("#SucursalTrabajador").attr("disabled", false);
-    $("#btnagregarTrabajador").button("disabled", false);
-    $("#btnnuevoTrabajador").button("disabled");
-}
 
 function btnaagregartrabajador() {
     //estadoBotones();
@@ -87,28 +72,35 @@ function btnaagregartrabajador() {
     var Cargo = $("#CargoTrabajador").val();
     var Sucursal = $("#SucursalTrabajador").val();
 
-    $.post(base_url + "welcome/btnuevotrabajador",
-            {
-                //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
-                //Variable de color negra Es el valor capturado
-                Rut: Rut,
-                Nombres: Nombres,
-                Apellidos: Apellidos,
-                Telefono: Telefono,
-                Direccion: Direccion,
-                FechaIngreso: FechaIngreso,
-                Estado: Estado,
-                Cargo: Cargo,
-                Sucursal: Sucursal
-            },
-    function (datos) {
-        if (datos.valor == 1) {
-            alert("Trabajador ya existe");
-        } else {
-            alert("Trabajador agregado correctamente");
-        }
-    }, 'json'//Formato en el que se enviaran los datos
-            );
+    if (Rut.length == 0 || Nombres.length == 0 || Apellidos.length == 0 ||
+            Telefono.length == 0 || Direccion.length == 0 || FechaIngreso.length == 0 ||
+            Estado.length == 0 || Cargo == 0 || Sucursal == 0) {
+        // alert("Faltan datos");
+    } else {
+
+        $.post(base_url + "welcome/btnuevotrabajador",
+                {
+                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                    //Variable de color negra Es el valor capturado
+                    Rut: Rut,
+                    Nombres: Nombres,
+                    Apellidos: Apellidos,
+                    Telefono: Telefono,
+                    Direccion: Direccion,
+                    FechaIngreso: FechaIngreso,
+                    Estado: Estado,
+                    Cargo: Cargo,
+                    Sucursal: Sucursal
+                },
+        function (datos) {
+            if (datos.valor == 1) {
+                alert("Trabajador ya existe");
+            } else {
+                alert("Trabajador agregado correctamente");
+            }
+        }, 'json'//Formato en el que se enviaran los datos
+                );
+    }
 }
 
 //Carga el combobox cargo
@@ -132,42 +124,64 @@ function cargaSucursal() {
             });
 }
 
-function camposTrabajador() {
-
-
-
-    $("#RutTrabajador").focus();
-
-    if ($("#RutTrabajador").val() == "") {
-
-        $("#mensajeTrabajador").show();
-
-        ("#RutTrabajador").focus();
-        return;
-    }
-
-
-    //Se limpian los campos
-//    $("#RutTrabajador").val("");
-//    $("#NombresTrabajador").val("");
-//    $("#ApellidosTrabajador").val("");
-//    $("#TelefonoTrabajador").val("");
-//    $("#DireccionTrabajador").val("");
-//    $("#Fecha_ingresoTrabajador").val("");
-//    $("#EstadoTrabajador").val("0");
-//    $("#CargoTrabajador").val("0");
-//    $("#SucursalTrabajador").val("0");
-//    
-//    //Se deshabilitan los campos
-//    $("#btnagregar").button(":disabled");
-//    $("#RutTrabajador").attr("readonly", true);
-//    $("#NombresTrabajador").attr("readonly", true);
-//    $("#ApellidosTrabajador").attr("readonly", true);
-//    $("#TelefonoTrabajador").attr("readonly", true);
-//    $("#DireccionTrabajador").attr("readonly", true);
-//    $("#Fecha_ingresoTrabajador").attr("readonly", true);
-//    $("#EstadoTrabajador").attr("disabled", true);
-//    $("#CargoTrabajador").attr("disabled", true);
+//Carga login al contenido
+function validaLogin() {
+    $.post(
+            base_url + "Welcome/validaLogin",
+            {},
+            function (pagina, datos) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $("#content").html(pagina, datos);
+                $(".menuUsuario").hide();
+                $(".menuUsuario").fadeIn(1000).delay(1000);
+                $("#btnIniciar").button().click(function () {
+                    //Se llama  a la funcion login
+                    botonLogin();
+                });
+            });
 }
 
+function botonLogin() {
+    $.post(
+            base_url + "Welcome/login",
+            {
+                usuario: $("#Username").val(),
+                contraseña: $("#Password").val()
+            },
+    function (datos) {
+        if (datos.mensaje != "") {
+            $("#mensajeLogin").html("<p class='msjError'>" + datos.mensaje + "</p>").fadeIn(100).delay(600).fadeOut(1000);
+        } else {
+            validaLogin();
+        }
+    }, 'json'
+            );
+}
+
+
+function trabajador() {
+    
+    $.post(
+            base_url + "Welcome/VistaTrabajador",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+
+function cliente() {
+    
+    $.post(
+            base_url + "Welcome/VistaCliente",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
 

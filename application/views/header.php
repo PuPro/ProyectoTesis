@@ -17,8 +17,9 @@
     <body>
         <div id="pagina">
             <div id="encabezado">
+                <div id="login"></div>
             </div>
-                <div id="contenido">
+                <div id="content">
 
                         
-                    </div>
+               
