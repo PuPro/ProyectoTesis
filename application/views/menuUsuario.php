@@ -18,7 +18,7 @@
                 <li><a href="#" onclick="comparacion();">COMPARACION</a></li>
                 <!--        cerrar sesion-->
                 <li class="dropdown pull-right">
-                    <a href="index.php"  class="dropdown-toggle">CERRAR SESION</a>
+                    <a  href="" class="dropdown-toggle" id="btn_salir">CERRAR SESION</a>
                 </li>
             </ul>
         </div>

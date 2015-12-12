@@ -131,9 +131,16 @@ function validaLogin() {
 
                 $(".menuUsuario").hide();
                 $(".menuUsuario").fadeIn(1000).delay(1000);
+                
+                $(".menuAdministrador").hide();
+                $(".menuAdministrador").fadeIn(1000).delay(1000);
+                
                 $("#btnIniciar").button().click(function () {
                     //Se llama  a la funcion login
                     botonLogin();
+                });
+                $("#btn_salir").click(function () {
+                    salir();
                 });
             });
 }
@@ -155,7 +162,7 @@ function botonLogin() {
             );
 }
 
-
+//cargar vistas en menu usuario
 function trabajador() {
 
     $.post(
@@ -187,3 +194,110 @@ function cliente() {
             });
 }
 
+function factura() {
+
+    $.post(
+            base_url + "Welcome/vistaFactura",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+
+function material() {
+
+    $.post(
+            base_url + "Welcome/vistaMaterial",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+function flujoCaja() {
+
+    $.post(
+            base_url + "Welcome/vistaFlujoCaja",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+function perIngreso() {
+
+    $.post(
+            base_url + "Welcome/vistaPerIngreso",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+function perEgreso() {
+
+    $.post(
+            base_url + "Welcome/vistaPerEgreso",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+function comparacion() {
+
+    $.post(
+            base_url + "Welcome/vistaComparacion",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+//vistas menu admin
+
+function usuario() {
+
+    $.post(
+            base_url + "Welcome/vistaUsuario",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+function sucursal() {
+
+    $.post(
+            base_url + "Welcome/vistaSucursal",
+            {},
+            function (pagina) {
+                //Carga archivos de respuestas que provengan de validaLogin
+                $(".aplicacion").hide();
+                $(".aplicacion").fadeIn(1000).delay(1000);
+                $(".aplicacion").html(pagina);
+            });
+}
+function salir() {
+    $.post(
+            base_url + "Welcome/salir", {},
+            function () {
+                validaLogin();
+            }
+    );
+}

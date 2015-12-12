@@ -55,7 +55,7 @@ class Welcome extends CI_Controller {
         if ($this->session->userdata('login')) {
             $data['rol'] = $this->session->userdata('rol');
             if ($data['rol'] == 1) {
-                $this->load->view('menuAdminstrador', $data);
+                $this->load->view('menuAdministrador', $data);
             } else {
                 $this->load->view('menuUsuario', $data);
             }
@@ -85,7 +85,7 @@ class Welcome extends CI_Controller {
         }
         echo json_encode(array("mensaje" => $msj));
     }
-    
+//    cargar menu usuario
     function vistaTrabajador(){
         $this->load->view('trabajador');
     }
@@ -93,6 +93,40 @@ class Welcome extends CI_Controller {
     function vistaCliente(){
         $this->load->view('cliente');
     }
-    
+    function vistaFactura(){
+        $this->load->view('factura');
+    }
 
+    function vistaMaterial(){
+        $this->load->view('material');
+    }
+    function vistaFlujoCaja(){
+        $this->load->view('flujoCaja');
+    }
+    function vistaPerIngreso(){
+        $this->load->view('perIngreso');
+    }
+    function vistaPerEgreso(){
+        $this->load->view('perEgreso');
+    }
+     function vistaComparacion(){
+        $this->load->view('comparacion');
+    }
+//    cargar menu admin
+    
+    function vistaUsuario(){
+        $this->load->view('usuario');
+    }
+    function vistaSucursal(){
+        $this->load->view('sucursal');
+    }
+    function salir() {
+        $this->session->sess_destroy();
+    }
+    
+    
+    
+    
+    
+    
 }
