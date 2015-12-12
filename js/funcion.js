@@ -200,6 +200,7 @@ function factura() {
             base_url + "Welcome/vistaFactura",
             {},
             function (pagina) {
+                cargaCliente();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -300,4 +301,18 @@ function salir() {
                 validaLogin();
             }
     );
+    
+}  
+    
+//-----------------facturas------------------------------
+function cargaCliente() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaCliente",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#clienteFactura").html(ruta, datos);
+            });
+    
 }
+

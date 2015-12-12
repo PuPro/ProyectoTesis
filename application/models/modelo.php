@@ -59,6 +59,48 @@ class modelo extends CI_Model {
         return $data;
     }
 
+    
+    
+//    ------------------------facturas--------------------------
+    
+    function cargaCliente() {
+        //Consulta a la base de datos añade tabla 
+        $this->db->select('rutcliente, nombre');
+        return $this->db->get('cliente');
+    }
+    
+    
+function botonGuardarfactura(
+$numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
+$this->db->select('idfactura');
+ $this->db->where('numeroFactura', $numeroFactura);
+$cantidad = $this->db->get('factura')->num_rows();
+if ($cantidad == 0):
+        $data = array(
+    'numerofactura'=> $numeroFactura,
+    'fecha_emision'=>$Fecha_ingresoFactura,
+    'fecha_vencimiento'=>$Fecha_vencimientoFactura,
+    'valorneto'=>$valorneto,
+    'valortotal'=>$valortotal,
+    'iva'=>$iva,
+    'cliente_rutcliente'=>$clienteFactura,
+    'empresa_rutempresa'=>$SucursalFactura,
+    'usuario_rutusuario'=>$rutusuario,
+    'proveedor_rutproveedor'=>$proveedorFactura,);
+$this->db->insert('factura', $data);
+  return 0;
+    else:
+        return 1;
+    endif;
+}
+    
+    
+    
+    
+    
+    
+    
+    
 }
 ?>
 

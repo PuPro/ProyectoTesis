@@ -125,6 +125,12 @@ class Welcome extends CI_Controller {
     }
     
     
+//    ------------------facturas---------------------
+    function cargaCliente() {
+        $datos['facturaClientes'] = $this->modelo->cargaCliente()->result();
+        $this->load->view('facturaClientes', $datos);
+    }
+    
     
     
     
