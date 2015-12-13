@@ -95,10 +95,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="status" class="col-sm-3 control-label">Material *:</label>
+                    <label for="concept" class="col-sm-3 control-label">Material *:</label>
                     <div class="col-sm-9">
-                        <select class="form-control" id="producto" name="producto">>
-                        </select>
+                        <select class="form-control" id="MaterialFactura" 
+                                    name="MaterialFactura" required="true">
+                            </select>                        
                     </div>
                 </div> 
                 <div class="form-group">

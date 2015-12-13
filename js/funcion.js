@@ -259,6 +259,7 @@ function factura() {
                 cargaCliente();
                 cargaSucursalFactura();
                 cargaProveedorfactura();
+                cargaMaterial();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -425,7 +426,15 @@ function cargaSucursalFactura() {
                 $("#proveedorFactura").html(ruta, datos);
             });
    }
-   
+    function cargaMaterial() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaMaterial",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#MaterialFactura").html(ruta, datos);
+            });
+   }
 //   ----------------cmbox flujo caja-----------------
 function cargaSucursalFlujoCaja() {
     //llama a la funcion que se encuentra el el welcome

@@ -138,7 +138,10 @@ class Welcome extends CI_Controller {
         $datos['proveedor'] = $this->modelo->cargaProveedor()->result();
         $this->load->view('proveedor', $datos);
     }
-       
+       function cargaMaterial() {
+        $datos['cargaMaterial'] = $this->modelo->cargaMaterial()->result();
+        $this->load->view('cargaMaterial', $datos);
+    }
 //    ------------tabla trabajador------------------------------------
     
     function tablaTrabajador() {

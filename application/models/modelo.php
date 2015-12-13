@@ -81,7 +81,11 @@ class modelo extends CI_Model {
         $this->db->select('*');
         return $this->db->get('proveedor');
     }
-    
+    function cargaMaterial() {
+        //Consulta a la base de datos añade tabla 
+        $this->db->select('*');
+        return $this->db->get('material');
+    }
 function botonGuardarfactura(
 $numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
 $this->db->select('idfactura');
