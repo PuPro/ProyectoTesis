@@ -184,7 +184,10 @@ class Welcome extends CI_Controller {
         $this->load->view('sucursal', $datos);
     }
     
-    
+    function cargaCargoUsuarios() {
+        $datos['cargo'] = $this->modelo->CargaSucursal()->result();
+        $this->load->view('cargo', $datos);
+    }
     
     
     

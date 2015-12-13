@@ -337,6 +337,7 @@ function usuario() {
             {},
             function (pagina) {
                 cargaSucursalUsuarios();
+                cargaCargoUsuarios()
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -456,7 +457,15 @@ function cargaSucursalFlujoCaja() {
                 $("#SucursalUsuario").html(ruta, datos);
             });
    }
-   
+    function cargaCargoUsuarios() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaCargoUsuarios",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#CargoUsuario").html(ruta, datos);
+            });
+   }
    
    
 //    tabla trabajador------------------
