@@ -1,9 +1,16 @@
 $(document).ready(function () {
-
-
-    $("#btnagregarTrabajador").button().click(function () {
-        btnaagregartrabajador()
+    validaLogin();
+    $("#modalMensaje").dialog({
+        modal: true,
+        autoOpen: false,
+        width: 350,
+        buttons: {
+            "cerrar": function () {
+                $(this).dialog("close");
+            }
+        }
     });
+
 
     /*---Filtro---*/
     $('.filterable .btn-filter').click(function () {
@@ -48,56 +55,8 @@ $(document).ready(function () {
         }
     });
 
-    validaLogin();
-
 });
 
-
-function btnaagregartrabajador() {
-    //estadoBotones();
-//
-    //Se almacenan los datos en las variables declaradas.
-    //con el .val() se obtiene el valor del los input
-    var Rut = $("#RutTrabajador").val();
-    var Nombres = $("#NombresTrabajador").val();
-    var Apellidos = $("#ApellidosTrabajador").val();
-    var Telefono = $("#TelefonoTrabajador").val();
-    var Direccion = $("#DireccionTrabajador").val();
-    var FechaIngreso = $("#Fecha_ingresoTrabajador").val();
-    var Estado = $("#EstadoTrabajador").val();
-    var Cargo = $("#CargoTrabajador").val();
-    var Sucursal = $("#SucursalTrabajador").val();
-
-    if (Rut.length == 0 || Nombres.length == 0 || Apellidos.length == 0 ||
-            Telefono.length == 0 || Direccion.length == 0 || FechaIngreso.length == 0 ||
-            Estado.length == 0 || Cargo == 0 || Sucursal == 0) {
-        // alert("Faltan datos");
-    } else {
-
-        $.post(base_url + "welcome/btnuevotrabajador",
-                {
-                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
-                    //Variable de color negra Es el valor capturado
-                    Rut: Rut,
-                    Nombres: Nombres,
-                    Apellidos: Apellidos,
-                    Telefono: Telefono,
-                    Direccion: Direccion,
-                    FechaIngreso: FechaIngreso,
-                    Estado: Estado,
-                    Cargo: Cargo,
-                    Sucursal: Sucursal
-                },
-        function (datos) {
-            if (datos.valor == 1) {
-                alert("Trabajador ya existe");
-            } else {
-                alert("Trabajador agregado correctamente");
-            }
-        }, 'json'//Formato en el que se enviaran los datos
-                );
-    }
-}
 
 //Carga el combobox cargo
 function cargaCargo() {
@@ -131,10 +90,10 @@ function validaLogin() {
 
                 $(".menuUsuario").hide();
                 $(".menuUsuario").fadeIn(1000).delay(1000);
-                
+
                 $(".menuAdministrador").hide();
                 $(".menuAdministrador").fadeIn(1000).delay(1000);
-                
+
                 $("#btnIniciar").button().click(function () {
                     //Se llama  a la funcion login
                     botonLogin();
@@ -176,9 +135,103 @@ function trabajador() {
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
-
-
+                $("#btnagregarTrabajador").button().click(function () {
+                    btnaagregartrabajador()
+                });
             });
+}
+
+function btnaagregartrabajador() {
+    //estadoBotones();
+//
+    //Se almacenan los datos en las variables declaradas.
+    //con el .val() se obtiene el valor del los input
+    var Rut = $("#RutTrabajador").val();
+    var Nombres = $("#NombresTrabajador").val();
+    var Apellidos = $("#ApellidosTrabajador").val();
+    var Telefono = $("#TelefonoTrabajador").val();
+    var Direccion = $("#DireccionTrabajador").val();
+    var FechaIngreso = $("#Fecha_ingresoTrabajador").val();
+    var Estado = $("#EstadoTrabajador").val();
+    var Cargo = $("#CargoTrabajador").val();
+    var Sucursal = $("#SucursalTrabajador").val();
+    var mensaje = "Error: ";
+    var error = 0;
+
+//validacion de campos vacios
+    if (Rut == "") {
+        mensaje += "Debe ingresar un rut";
+        error++;
+    }
+
+    if (Nombres == "") {
+        mensaje += "Debe ingresar un nombre(s)";
+        error++;
+    }
+
+    if (Apellidos == "") {
+        mensaje += "Debe ingresar un apellido(s)";
+        error++;
+    }
+
+    if (Telefono == "") {
+        mensaje += "Debe ingresar un teléfono";
+        error++;
+    }
+
+    if (Direccion == "") {
+        mensaje += "Debe ingresar una direccion";
+        error++;
+    }
+
+    if (FechaIngreso == "") {
+        mensaje += "Debe ingresar una fecha de ingreso";
+        error++;
+    }
+
+    if (Estado == "") {
+        mensaje += "Debe ingresar un estado";
+        error++;
+    }
+
+    if (Cargo == "") {
+        mensaje += "Debe ingresar un cargo";
+        error++;
+    }
+
+    if (Sucursal == "") {
+        mensaje += "Debe ingresar una sucursal";
+        error++;
+    }
+
+    if (error != 0) {
+        $("#modalMensaje").html("<p class=msjError>" + mensaje + "</p>");
+        $("#modalMensaje").dialog("open");
+    } else {
+
+        $.post(base_url + "welcome/btnuevotrabajador",
+                {
+                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                    //Variable de color negra Es el valor capturado
+                    Rut: Rut,
+                    Nombres: Nombres,
+                    Apellidos: Apellidos,
+                    Telefono: Telefono,
+                    Direccion: Direccion,
+                    FechaIngreso: FechaIngreso,
+                    Estado: Estado,
+                    Cargo: Cargo,
+                    Sucursal: Sucursal
+                },
+        function (datos) {
+            if (datos.valor == 1) {
+                alert("Trabajador ya existe");
+            } else {
+                alert("Trabajador agregado correctamente");
+            }
+        }, 'json'//Formato en el que se enviaran los datos
+                );
+    }
 }
 
 function cliente() {

@@ -1,12 +1,12 @@
 <div class="menuAdministrador">
     <div class="bs-example">
         <ul class="nav nav-pills">
-            <li><a href="#" onclick="usuario();" >ADMINISTRAR USUARIOS</a></li>
+            <li class="active"><a href="#" onclick="usuario();" >ADMINISTRAR USUARIOS</a></li>
             <li><a href="#" onclick="sucursal();">ADMINISTRAR DATOS EMPRESA</a></li>
 
             <!--        cerrar sesion-->
             <li class="dropdown pull-right">
-                <a  href="" class="dropdown-toggle" id="btn_salir">CERRAR SESION</a>
+                <a  href="#" class="dropdown-toggle" id="btn_salir">CERRAR SESION</a>
             </li>
         </ul>
     </div>

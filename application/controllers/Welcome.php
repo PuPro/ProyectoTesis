@@ -62,6 +62,8 @@ class Welcome extends CI_Controller {
         } else {
             $this->load->view('login', $data);
         }
+        
+      
     }
 
     function login() {
@@ -85,44 +87,60 @@ class Welcome extends CI_Controller {
         }
         echo json_encode(array("mensaje" => $msj));
     }
+
 //    cargar menu usuario
-    function vistaTrabajador(){
-        $this->load->view('trabajador');
+    function vistaTrabajador() {         
+        if ($this->session->userdata("login")) {
+            $this->load->view('trabajador');
+        } else {
+            redirect(base_url());
+        }
     }
-    
-    function vistaCliente(){
+
+    function vistaCliente() {
         $this->load->view('cliente');
     }
-    function vistaFactura(){
+
+    function vistaFactura() {
         $this->load->view('factura');
     }
 
-    function vistaMaterial(){
+    function vistaMaterial() {
         $this->load->view('material');
     }
-    function vistaFlujoCaja(){
+
+    function vistaFlujoCaja() {
         $this->load->view('flujoCaja');
     }
-    function vistaPerIngreso(){
+
+    function vistaPerIngreso() {
         $this->load->view('perIngreso');
     }
-    function vistaPerEgreso(){
+
+    function vistaPerEgreso() {
         $this->load->view('perEgreso');
     }
-     function vistaComparacion(){
+
+    function vistaComparacion() {
         $this->load->view('comparacion');
     }
+
 //    cargar menu admin
-    
-    function vistaUsuario(){
+
+    function vistaUsuario() {
         $this->load->view('usuario');
     }
-    function vistaSucursal(){
+
+    function vistaSucursal() {
         $this->load->view('sucursal');
     }
+
     function salir() {
         $this->session->sess_destroy();
     }
+<<<<<<< HEAD
+
+=======
     
     
 //    ------------------facturas---------------------
@@ -135,4 +153,5 @@ class Welcome extends CI_Controller {
     
     
     
+>>>>>>> origin/master
 }

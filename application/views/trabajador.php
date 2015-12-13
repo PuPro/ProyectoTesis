@@ -9,7 +9,7 @@
                     <div class="col-sm-6">
                         <label for="concept" class="col-sm-3 control-label">Rut *:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="DireccionTrabajador" name="RutTrabajador" 
+                            <input type="text" class="form-control" id="RutTrabajador" name="RutTrabajador" 
                                    placeholder="Ingrese Rut..." required="true">
                         </div>
                     </div>
@@ -17,7 +17,7 @@
                         <label for="date" class="col-sm-3 control-label">Nombre(s) *:</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" placeholder="Ingrese nombre..."
-                                   id="NombreTrabajador" name="NombreTrabajador" required="true">
+                                   id="NombresTrabajador" name="NombresTrabajador" required="true">
                         </div>
                     </div>
                 </div>                               
@@ -25,8 +25,8 @@
                     <div class="col-sm-6">
                         <label for="concept" class="col-sm-3 control-label">Apellido(s) *:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ApellidoTrabajador" 
-                                   name="ApellidoTrabajador" 
+                            <input type="text" class="form-control" id="ApellidosTrabajador" 
+                                   name="ApellidosTrabajador" 
                                    placeholder="Ingrese un apellido(s)..." required="true">
                         </div>
                     </div>

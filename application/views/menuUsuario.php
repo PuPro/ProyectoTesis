@@ -3,6 +3,10 @@
         <div class="bs-example">
             <ul class="nav nav-pills">
                 <li class="active"><a href="#">INICIO</a></li>
+                
+                <!--onclik llama a la funcion trabajador que se 
+                encuentran en el archivo funcion.js-->
+                
                 <li><a href="#" onclick="trabajador();" >TRABAJADOR</a></li>
                 <li><a href="#" onclick="cliente();">CLIENTE</a></li>
                 <li><a href="#" onclick="factura();">FACTURA</a></li>
