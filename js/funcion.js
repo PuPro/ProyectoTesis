@@ -365,14 +365,13 @@ function salir() {
                 validaLogin();
             }
     );
-<<<<<<< HEAD
+
 
 }
 
 //-----------------facturas------------------------------
-=======
-    
-}  
+
+     
     //-----------------cmbox clientes------------------------------
     function CargaRegion() {
     //llama a la funcion que se encuentra el el welcome
@@ -406,7 +405,7 @@ function CargaComuna() {
 }
     
 //-----------------cmbox facturas------------------------------
->>>>>>> origin/master
+
 function cargaCliente() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaCliente",
@@ -415,11 +414,11 @@ function cargaCliente() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#clienteFactura").html(ruta, datos);
             });
-<<<<<<< HEAD
+
 
 }
-=======
-   }
+
+
 function cargaSucursalFactura() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaSucursalFactura",
@@ -468,7 +467,6 @@ function cargaSucursalFlujoCaja() {
    }
    
 //   --------------cmbox admin------------------------
->>>>>>> origin/master
 
     function cargaSucursalUsuarios() {
     //llama a la funcion que se encuentra el el welcome

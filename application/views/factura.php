@@ -45,16 +45,16 @@
 
                         <div class="form-group">
                             <div class="col-sm-6">
-<<<<<<< HEAD
+
                                 <label for="concept" class="col-sm-3 control-label">Cliente *:</label>
                                 <div class="col-sm-9" >
                                     <select class="form-control" id="clienteFactura" 
                                             name="clienteFactura" required="true">
-=======
+
                                 <label for="status" class="col-sm-3 control-label">Cliente *:</label>
                                 <div class="col-sm-9" >
                                     <select class="form-control" id="clienteFactura" name="clienteFactura">
->>>>>>> origin/master
+
                                     </select>
                                 </div>
                             </div>

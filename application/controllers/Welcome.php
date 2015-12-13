@@ -123,12 +123,7 @@ class Welcome extends CI_Controller {
     function salir() {
         $this->session->sess_destroy();
     }
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> origin/master
     
     
 //    ------------------facturas---------------------
@@ -198,10 +193,5 @@ class Welcome extends CI_Controller {
         $this->load->view('cargo', $datos);
     }
     
-<<<<<<< HEAD
 
-=======
-    
-    
->>>>>>> origin/master
 }
