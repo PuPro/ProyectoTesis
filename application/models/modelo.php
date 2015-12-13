@@ -1,7 +1,7 @@
 <?php
 
 class modelo extends CI_Model {
-    
+
 //    ----------------- loguin--------------
     //Funcion que verifica si el usuario esta en la base de datos
     //y devuelve valores que le pertenecen
@@ -22,6 +22,7 @@ class modelo extends CI_Model {
         }
         return $data;
     }
+
 //-------------------trabajador-----------------------
     function CargaCargo() {
         //Consulta a la base de datos a ña tabla cargo
@@ -59,83 +60,118 @@ class modelo extends CI_Model {
             return 1;
         endif;
     }
-    
+
     function tablaTrabajador() {
         //Consulta a la base de datos añade tabla 
         $this->db->select('*');
         return $this->db->get('trabajador');
     }
 
-
-    
-    
 //    ------------------------facturas--------------------------
-    
+
     function cargaCliente() {
         //Consulta a la base de datos añade tabla 
         $this->db->select('rutcliente, nombre');
         return $this->db->get('cliente');
     }
+
     function cargaProveedor() {
         //Consulta a la base de datos añade tabla 
         $this->db->select('*');
         return $this->db->get('proveedor');
     }
+
     function cargaMaterial() {
         //Consulta a la base de datos añade tabla 
         $this->db->select('*');
         return $this->db->get('material');
     }
-function botonGuardarfactura(
-$numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
-$this->db->select('idfactura');
- $this->db->where('numeroFactura', $numeroFactura);
-$cantidad = $this->db->get('factura')->num_rows();
-if ($cantidad == 0):
-        $data = array(
-    'numerofactura'=> $numeroFactura,
-    'fecha_emision'=>$Fecha_ingresoFactura,
-    'fecha_vencimiento'=>$Fecha_vencimientoFactura,
-    'valorneto'=>$valorneto,
-    'valortotal'=>$valortotal,
-    'iva'=>$iva,
-    'cliente_rutcliente'=>$clienteFactura,
-    'empresa_rutempresa'=>$SucursalFactura,
-    'usuario_rutusuario'=>$rutusuario,
-    'proveedor_rutproveedor'=>$proveedorFactura,);
-$this->db->insert('factura', $data);
-  return 0;
-    else:
-        return 1;
-    endif;
-}
-    
-    
-     
-    
-    
-    
+
+//    function Guardarfactura(
+//    $numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
+//        $this->db->select('idfactura');
+//        $this->db->where('numeroFactura', $numeroFactura);
+//        $cantidad = $this->db->get('factura')->num_rows();
+//        if ($cantidad == 0):
+//            $data = array(
+//                'numerofactura' => $numeroFactura,
+//                'fecha_emision' => $Fecha_ingresoFactura,
+//                'fecha_vencimiento' => $Fecha_vencimientoFactura,
+//                'valorneto' => $valorneto,
+//                'valortotal' => $valortotal,
+//                'iva' => $iva,
+//                'cliente_rutcliente' => $clienteFactura,
+//                'empresa_rutempresa' => $SucursalFactura,
+//                'usuario_rutusuario' => $rutusuario,
+//                'proveedor_rutproveedor' => $proveedorFactura,);
+//            $this->db->insert('factura', $data);
+//            return 0;
+//        else:
+//            return 1;
+//        endif;
+//    }
 //    -----------------clientes------------
-    function CargaRegion () {
+    function CargaRegion() {
         //Consulta a la base de datos a ña tabla cargo
         $this->db->select('*');
         return $this->db->get('region');
     }
 
-function CargaComuna () {
+    function CargaComuna() {
         //Consulta a la base de datos a ña tabla cargo
         $this->db->select('*');
         return $this->db->get('comuna');
     }
 
+    function GuardarClientes($RutCliente, $NombreCliente, $ApellidoCliente, $TelefonoCliente, $Fecha_ingresoCliente, $DireccionCliente, $ComunaCliente, $SucursalCliente) {
+
+        $this->db->select('rutcliente');
+        $this->db->where('rutcliente', $RutCliente);
+        $cantidad = $this->db->get('cliente')->num_rows();
+        if ($cantidad == 0):
+            $data = array(
+                'rutcliente' => $RutCliente,
+                'nombre' => $NombreCliente,
+                'apellido' => $ApellidoCliente,
+                'direccion' => $DireccionCliente,
+                'telefono' => $TelefonoCliente,
+                'fecha_ingreso' => $Fecha_ingresoCliente,
+                'empresa_rutempresa' => $SucursalCliente,
+                'ciudad_idciudad' => $ComunaCliente,);
+            $this->db->insert('cliente', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
 //------------flujo caja-------------------
-    
-    function CargaItem () {
+
+    function CargaItem() {
         //Consulta a la base de datos a ña tabla cargo
         $this->db->select('*');
         return $this->db->get('item');
     }
-    
+
+    function GuardarFlujoCaja($Fecha_ingresoFlujor, $ITEMFlujo, $SucursalFlujo, $MontoTotalFlujo, $DescripcionFlujo) {
+
+        $this->db->select('fecha_creacion');
+        $this->db->where('fecha_creacion', $Fecha_ingresoFlujor);
+        $cantidad = $this->db->get('flujo')->num_rows();
+        if ($cantidad == 0):
+            $data = array(
+                'fecha_creacion' => $Fecha_ingresoFlujor,
+                'monto' => $MontoTotalFlujo,
+                'descripcion' => $DescripcionFlujo,
+                'empresa_rutempresa' => $SucursalFlujo,
+                'item_iditem' => $ITEMFlujo,);
+            $this->db->insert('flujo', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
 }
 ?>
 

@@ -85,123 +85,161 @@ class Welcome extends CI_Controller {
         }
         echo json_encode(array("mensaje" => $msj));
     }
+
 //    cargar menu usuario
-    function vistaTrabajador(){
+    function vistaTrabajador() {
         $this->load->view('trabajador');
     }
-    
-    function vistaCliente(){
+
+    function vistaCliente() {
         $this->load->view('cliente');
     }
-    function vistaFactura(){
+
+    function vistaFactura() {
         $this->load->view('factura');
     }
 
-    function vistaMaterial(){
+    function vistaMaterial() {
         $this->load->view('material');
     }
-    function vistaFlujoCaja(){
+
+    function vistaFlujoCaja() {
         $this->load->view('flujoCaja');
     }
-    function vistaPerIngreso(){
+
+    function vistaPerIngreso() {
         $this->load->view('perIngreso');
     }
-    function vistaPerEgreso(){
+
+    function vistaPerEgreso() {
         $this->load->view('perEgreso');
     }
-     function vistaComparacion(){
+
+    function vistaComparacion() {
         $this->load->view('comparacion');
     }
+
 //    cargar menu admin
-    
-    function vistaUsuario(){
+
+    function vistaUsuario() {
         $this->load->view('usuario');
     }
-    function vistaEmpresa(){
+
+    function vistaEmpresa() {
         $this->load->view('empresa');
     }
+
     function salir() {
         $this->session->sess_destroy();
     }
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> origin/master
-    
-    
 //    ------------------facturas---------------------
     function cargaCliente() {
         $datos['facturaClientes'] = $this->modelo->cargaCliente()->result();
         $this->load->view('facturaClientes', $datos);
     }
+
     function cargaSucursalFactura() {
         $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
         $this->load->view('sucursal', $datos);
     }
+
     function cargaProveedorfactura() {
         $datos['proveedor'] = $this->modelo->cargaProveedor()->result();
         $this->load->view('proveedor', $datos);
     }
-       function cargaMaterial() {
+
+    function cargaMaterial() {
         $datos['cargaMaterial'] = $this->modelo->cargaMaterial()->result();
         $this->load->view('cargaMaterial', $datos);
     }
+
 //    ------------tabla trabajador------------------------------------
-    
+
     function tablaTrabajador() {
         $datos['tablaTrabajador'] = $this->modelo->tablaTrabajador()->result();
         $this->load->view('tablaTrabajador', $datos);
     }
-    
+
 //    -------------------cmboxcliente------------
-    
+
     function CargaRegion() {
         $datos['region'] = $this->modelo->CargaRegion()->result();
         $this->load->view('region', $datos);
     }
-    
+
     function cargaSucursalCliente() {
         $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
         $this->load->view('sucursal', $datos);
     }
-    
+
     function CargaComuna() {
         $datos['comuna'] = $this->modelo->CargaComuna()->result();
         $this->load->view('comuna', $datos);
     }
-    
-    
+
+    function btnuevocliente() {
+
+
+        $RutCliente = $this->input->post('Rut');
+        $NombreCliente = $this->input->post('Nombres');
+        $ApellidoCliente = $this->input->post('Apellidos');
+        $TelefonoCliente = $this->input->post('Telefono');
+        $Fecha_ingresoCliente = $this->input->post('FechaIngreso');
+        $DireccionCliente = $this->input->post('Direccion');
+        $ComunaCliente = $this->input->post('Comuna');
+        $SucursalCliente = $this->input->post('Sucursal');
+
+        $valor = 1;
+
+        if ($this->modelo->GuardarClientes
+                        ($RutCliente, $NombreCliente, $ApellidoCliente, $TelefonoCliente, $Fecha_ingresoCliente, $DireccionCliente, $ComunaCliente, $SucursalCliente) == 0) {
+            $valor = 0;
+        }
+        //Se imprime la variable valor enviandolo al archivo funcion
+        echo json_encode(array('valor' => $valor));
+    }
+
 //    -----------------------flujo caja----------------
-    
+
     function cargaSucursalFlujoCaja() {
         $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
         $this->load->view('sucursal', $datos);
     }
-      function cargaItem() {
+
+    function cargaItem() {
         $datos['item'] = $this->modelo->CargaItem()->result();
         $this->load->view('item', $datos);
     }
 
+    function btnuevoflujocaja() {
+        $Fecha_ingresoFlujor = $this->input->post('FechaIngreso');
+        $ITEMFlujo = $this->input->post('ItemFlujo');
+        $SucursalFlujo = $this->input->post('Sucursal');
+        $MontoTotalFlujo = $this->input->post('Monto');
+        $DescripcionFlujo = $this->input->post('Descripcion');        
+        $valor = 1;
+
+        if ($this->modelo->GuardarFlujoCaja
+                        ($Fecha_ingresoFlujor, $ITEMFlujo, $SucursalFlujo, $MontoTotalFlujo, $DescripcionFlujo) == 0) {
+            $valor = 0;
+        }
+        //Se imprime la variable valor enviandolo al archivo funcion
+        echo json_encode(array('valor' => $valor));
+    }
+    
     
 //    --------------------administrador---------------
-    
-    
-     function cargaSucursalUsuarios() {
+
+
+    function cargaSucursalUsuarios() {
         $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
         $this->load->view('sucursal', $datos);
     }
-    
+
     function cargaCargoUsuarios() {
         $datos['cargo'] = $this->modelo->CargaSucursal()->result();
         $this->load->view('cargo', $datos);
     }
-    
-<<<<<<< HEAD
 
-=======
-    
-    
->>>>>>> origin/master
 }

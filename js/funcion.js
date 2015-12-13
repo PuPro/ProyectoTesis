@@ -110,13 +110,13 @@ function botonLogin() {
                 usuario: $("#Username").val(),
                 contraseña: $("#Password").val()
             },
-    function (datos) {
-        if (datos.mensaje != "") {
-            $("#mensajeLogin").html("<p class='msjError'>" + datos.mensaje + "</p>").fadeIn(100).delay(600).fadeOut(1000);
-        } else {
-            validaLogin();
-        }
-    }, 'json'
+            function (datos) {
+                if (datos.mensaje != "") {
+                    $("#mensajeLogin").html("<p class='msjError'>" + datos.mensaje + "</p>").fadeIn(100).delay(600).fadeOut(1000);
+                } else {
+                    validaLogin();
+                }
+            }, 'json'
             );
 }
 
@@ -135,7 +135,7 @@ function trabajador() {
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
                 $("#btnagregarTrabajador").button().click(function () {
-                    btnaagregartrabajador()
+                    btnaagregartrabajador();
                 });
             });
 }
@@ -222,15 +222,15 @@ function btnaagregartrabajador() {
                     Cargo: Cargo,
                     Sucursal: Sucursal
                 },
-        function (datos) {
-            if (datos.valor == 1) {
-                $("#modalMensaje").html("<p class='msjError'>Trabajador ya existente</p>");
-            } else {
-                $("#modalMensaje").html("<p class='msjOk'>Trabajador agregado correctamente</p>");
-                trabajador();
-            }
-            $("#modalMensaje").dialog("open");
-        }, 'json'//Formato en el que se enviaran los datos
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Trabajador ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Trabajador agregado correctamente</p>");
+                        trabajador();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
                 );
     }
 }
@@ -248,7 +248,100 @@ function cliente() {
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
+                $("#btnagregarCliente").button().click(function () {
+                   btnaagregarcliente();
+                });
+                
+                
             });
+}
+
+function btnaagregarcliente() {
+    //Se almacenan los datos en las variables declaradas.
+    //con el .val() se obtiene el valor del los input
+    var Rut = $("#RutCliente").val();
+    var Nombres = $("#NombreCliente").val();
+    var Apellidos = $("#ApellidoCliente").val();
+    var Telefono = $("#TelefonoCliente").val();
+    var FechaIngreso = $("#Fecha_ingresoCliente").val();
+    var Direccion = $("#DireccionCliente").val();
+    var Comuna = $("#ComunaCliente").val();
+    var Sucursal = $("#SucursalCliente").val();
+    var mensaje = "<strong id='tituloError'>Error:</strong> <br>";
+    var error = 0;
+
+    $("#RutCliente").focus();
+
+//validacion de campos vacios
+    if (Rut == "") {
+        mensaje += "Rut no valido.<br>";
+        error++;
+    }
+
+    if (Nombres == "") {
+        mensaje += "Nombre(s) no valido.<br>";
+        error++;
+    }
+
+    if (Apellidos == "") {
+        mensaje += "Apellido(s) no valido.<br>";
+        error++;
+    }
+
+    if (Telefono == "") {
+        mensaje += "Teléfono no valido.<br>";
+        error++;
+    }
+
+    if (FechaIngreso == "") {
+        mensaje += "Fecha Ingreso no valida.<br>";
+        error++;
+    }
+
+    if (Direccion == "") {
+        mensaje += "Direccion no valida.<br>";
+        error++;
+    }
+
+    if (Comuna == "") {
+        mensaje += "Comuna no valido.<br>";
+        error++;
+    }
+
+    if (Sucursal == "") {
+        mensaje += "Sucursal no valido.<br>";
+        error++;
+    }
+
+    if (error != 0) {
+        $("#modalMensaje").html("<p class='msjError'>" + mensaje + "</p>");
+        $("#modalMensaje").dialog("open");
+    } else {
+
+        $.post(base_url + "welcome/btnuevocliente",
+                {
+                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                    //Variable de color negra Es el valor capturado
+                    Rut: Rut,
+                    Nombres: Nombres,
+                    Apellidos: Apellidos,
+                    Telefono: Telefono,
+                    FechaIngreso: FechaIngreso,
+                    Direccion: Direccion,
+                    Comuna: Comuna,
+                    Sucursal: Sucursal
+                },
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Cliente ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Cliente agregado correctamente</p>");
+                        cliente();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
+                );
+    }
 }
 
 function factura() {
@@ -292,8 +385,82 @@ function flujoCaja() {
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
+                $("#btnagregarFlujoCaja").button().click(function () {
+                   btnaagregarflujocaja();
+                });
             });
 }
+
+function btnaagregarflujocaja() {
+    //Se almacenan los datos en las variables declaradas.
+    //con el .val() se obtiene el valor del los input
+    var FechaIngreso = $("#Fecha_ingresoFlujor").val();
+    var ItemFlujo = $("#ITEMFlujo").val();
+    var Sucursal = $("#SucursalFlujo").val();
+    var Monto = $("#MontoTotalFlujo").val();
+    var Descripcion = $("#DescripcionFlujo").val();
+    var mensaje = "<strong id='tituloError'>Error:</strong> <br>";
+    var error = 0;
+
+    $("#Fecha_ingresoFlujor").focus();
+
+//validacion de campos vacios
+    if (FechaIngreso == "") {
+        mensaje += "Fecha Ingreso no valido.<br>";
+        error++;
+    }
+
+    if (ItemFlujo == "") {
+        mensaje += "Item no valido.<br>";
+        error++;
+    }
+
+    if (Sucursal == "") {
+        mensaje += "Sucursal no valido.<br>";
+        error++;
+    }
+
+    if (Monto == "") {
+        mensaje += "Monto no valido.<br>";
+        error++;
+    }
+
+    if (Descripcion == "") {
+        mensaje += "Descripcion no valida.<br>";
+        error++;
+    }
+
+
+    if (error != 0) {
+        $("#modalMensaje").html("<p class='msjError'>" + mensaje + "</p>");
+        $("#modalMensaje").dialog("open");
+    } else {
+
+        $.post(base_url + "welcome/btnuevoflujocaja",
+                {
+                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                    //Variable de color negra Es el valor capturado
+                    FechaIngreso: FechaIngreso,
+                    ItemFlujo: ItemFlujo,
+                    Sucursal: Sucursal,
+                    Monto: Monto,
+                    Descripcion: Descripcion,
+                   
+                },
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>ID flujo caja ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>flujo caja agregado correctamente</p>");
+                        flujoCaja();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
+                );
+    }
+}
+
+
 function perIngreso() {
 
     $.post(
@@ -365,16 +532,16 @@ function salir() {
                 validaLogin();
             }
     );
-<<<<<<< HEAD
+
 
 }
 
 //-----------------facturas------------------------------
-=======
-    
-}  
-    //-----------------cmbox clientes------------------------------
-    function CargaRegion() {
+
+
+
+//-----------------cmbox clientes------------------------------
+function CargaRegion() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/CargaRegion",
             {},
@@ -382,7 +549,7 @@ function salir() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#RegionCliente").html(ruta, datos);
             });
-    
+
 }
 function cargaSucursalCliente() {
     //llama a la funcion que se encuentra el el welcome
@@ -392,7 +559,7 @@ function cargaSucursalCliente() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#SucursalCliente").html(ruta, datos);
             });
-    
+
 }
 function CargaComuna() {
     //llama a la funcion que se encuentra el el welcome
@@ -402,11 +569,14 @@ function CargaComuna() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#ComunaCliente").html(ruta, datos);
             });
-    
+
 }
-    
+
+
+
+
 //-----------------cmbox facturas------------------------------
->>>>>>> origin/master
+
 function cargaCliente() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaCliente",
@@ -415,11 +585,10 @@ function cargaCliente() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#clienteFactura").html(ruta, datos);
             });
-<<<<<<< HEAD
+
 
 }
-=======
-   }
+
 function cargaSucursalFactura() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaSucursalFactura",
@@ -428,8 +597,8 @@ function cargaSucursalFactura() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#SucursalFactura").html(ruta, datos);
             });
-   }
-   function cargaProveedorfactura() {
+}
+function cargaProveedorfactura() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaProveedorfactura",
             {},
@@ -437,8 +606,8 @@ function cargaSucursalFactura() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#proveedorFactura").html(ruta, datos);
             });
-   }
-    function cargaMaterial() {
+}
+function cargaMaterial() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaMaterial",
             {},
@@ -446,7 +615,7 @@ function cargaSucursalFactura() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#MaterialFactura").html(ruta, datos);
             });
-   }
+}
 //   ----------------cmbox flujo caja-----------------
 function cargaSucursalFlujoCaja() {
     //llama a la funcion que se encuentra el el welcome
@@ -456,8 +625,8 @@ function cargaSucursalFlujoCaja() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#SucursalFlujo").html(ruta, datos);
             });
-   }
-   function cargaItem() {
+}
+function cargaItem() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaItem",
             {},
@@ -465,12 +634,11 @@ function cargaSucursalFlujoCaja() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#ITEMFlujo").html(ruta, datos);
             });
-   }
-   
-//   --------------cmbox admin------------------------
->>>>>>> origin/master
+}
 
-    function cargaSucursalUsuarios() {
+//   --------------cmbox admin------------------------
+
+function cargaSucursalUsuarios() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaSucursalUsuarios",
             {},
@@ -478,8 +646,8 @@ function cargaSucursalFlujoCaja() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#SucursalUsuario").html(ruta, datos);
             });
-   }
-    function cargaCargoUsuarios() {
+}
+function cargaCargoUsuarios() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaCargoUsuarios",
             {},
@@ -487,16 +655,16 @@ function cargaSucursalFlujoCaja() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#CargoUsuario").html(ruta, datos);
             });
-   }
-   
-   
+}
+
+
 //    tabla trabajador------------------
-    function tablaTrabajador() {
-        //llama a la funcion que se encuentra el el welcome
-        $.post(base_url + "Welcome/tablaTrabajador",
-                {},
-                function (ruta, datos) {
-                    //Se cargan los datos que vienen de cargarCargo del welcome
-                    $("#tablatrabaj").html(ruta, datos);
-                });
-    }
+function tablaTrabajador() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/tablaTrabajador",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#tablatrabaj").html(ruta, datos);
+            });
+}
