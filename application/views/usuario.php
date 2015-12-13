@@ -12,9 +12,9 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <label for="date" class="col-sm-3 control-label">Nombre(s) *:</label>
+                        <label for="concept" class="col-sm-3 control-label">Nombre(s) *:</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="NombresUsuario" name="NombresUsuario">
+                            <input type="text" class="form-control" id="NombresUsuario" name="NombresUsuario">
                         </div>
                     </div>
 
@@ -30,8 +30,8 @@
                     <div class="col-sm-6">
                         <label for="status" class="col-sm-3 control-label">Cargo *:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="CargoUsuario" name="CargoUsuario" 
-                                    required="true">
+                            <select class="form-control" id="CargoUsuario" 
+                                    name="CargoUsuario" required="true">
                             </select>
                         </div>
                     </div>

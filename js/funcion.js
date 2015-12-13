@@ -241,6 +241,9 @@ function cliente() {
             base_url + "Welcome/VistaCliente",
             {},
             function (pagina) {
+                CargaRegion();
+                cargaSucursalCliente();
+                CargaComuna();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -255,6 +258,9 @@ function factura() {
             {},
             function (pagina) {
                 cargaCliente();
+                cargaSucursalFactura();
+                cargaProveedorfactura();
+                cargaMaterial();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -280,6 +286,8 @@ function flujoCaja() {
             base_url + "Welcome/vistaFlujoCaja",
             {},
             function (pagina) {
+                cargaSucursalFlujoCaja();
+                cargaItem();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -330,16 +338,18 @@ function usuario() {
             base_url + "Welcome/vistaUsuario",
             {},
             function (pagina) {
+                cargaSucursalUsuarios();
+                cargaCargoUsuarios()
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
             });
 }
-function sucursal() {
+function Empresa() {
 
     $.post(
-            base_url + "Welcome/vistaSucursal",
+            base_url + "Welcome/vistaEmpresa",
             {},
             function (pagina) {
                 //Carga archivos de respuestas que provengan de validaLogin
@@ -355,10 +365,48 @@ function salir() {
                 validaLogin();
             }
     );
+<<<<<<< HEAD
 
 }
 
 //-----------------facturas------------------------------
+=======
+    
+}  
+    //-----------------cmbox clientes------------------------------
+    function CargaRegion() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/CargaRegion",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#RegionCliente").html(ruta, datos);
+            });
+    
+}
+function cargaSucursalCliente() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaSucursalCliente",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#SucursalCliente").html(ruta, datos);
+            });
+    
+}
+function CargaComuna() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/CargaComuna",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#ComunaCliente").html(ruta, datos);
+            });
+    
+}
+    
+//-----------------cmbox facturas------------------------------
+>>>>>>> origin/master
 function cargaCliente() {
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/cargaCliente",
@@ -367,6 +415,88 @@ function cargaCliente() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#clienteFactura").html(ruta, datos);
             });
+<<<<<<< HEAD
 
 }
+=======
+   }
+function cargaSucursalFactura() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaSucursalFactura",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#SucursalFactura").html(ruta, datos);
+            });
+   }
+   function cargaProveedorfactura() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaProveedorfactura",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#proveedorFactura").html(ruta, datos);
+            });
+   }
+    function cargaMaterial() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaMaterial",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#MaterialFactura").html(ruta, datos);
+            });
+   }
+//   ----------------cmbox flujo caja-----------------
+function cargaSucursalFlujoCaja() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaSucursalFlujoCaja",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#SucursalFlujo").html(ruta, datos);
+            });
+   }
+   function cargaItem() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaItem",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#ITEMFlujo").html(ruta, datos);
+            });
+   }
+   
+//   --------------cmbox admin------------------------
+>>>>>>> origin/master
 
+    function cargaSucursalUsuarios() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaSucursalUsuarios",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#SucursalUsuario").html(ruta, datos);
+            });
+   }
+    function cargaCargoUsuarios() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaCargoUsuarios",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#CargoUsuario").html(ruta, datos);
+            });
+   }
+   
+   
+//    tabla trabajador------------------
+    function tablaTrabajador() {
+        //llama a la funcion que se encuentra el el welcome
+        $.post(base_url + "Welcome/tablaTrabajador",
+                {},
+                function (ruta, datos) {
+                    //Se cargan los datos que vienen de cargarCargo del welcome
+                    $("#tablatrabaj").html(ruta, datos);
+                });
+    }
