@@ -1,7 +1,28 @@
 <?php
 
 class modelo extends CI_Model {
-
+    
+//    ----------------- loguin--------------
+    //Funcion que verifica si el usuario esta en la base de datos
+    //y devuelve valores que le pertenecen
+    function login($usuario, $clave) {
+        $this->db->select('*');
+        $this->db->where('rutusuario', $usuario);
+        $this->db->where('contraseña', $clave);
+        $datos = $this->db->get('usuario');
+        $data['usuario'] = "";
+        $data['rol'] = "";
+        $data['nombre'] = "";
+        $data['apellido'] = "";
+        foreach ($datos->result() as $fila) {
+            $data['usuario'] = $fila->rutusuario;
+            $data['rol'] = $fila->Rol_idRol;
+            $data['nombre'] = $fila->nombre;
+            $data['apellido'] = $fila->apellido;
+        }
+        return $data;
+    }
+//-------------------trabajador-----------------------
     function CargaCargo() {
         //Consulta a la base de datos a ña tabla cargo
         $this->db->select('*');
@@ -38,26 +59,13 @@ class modelo extends CI_Model {
             return 1;
         endif;
     }
-
-    //Funcion que verifica si el usuario esta en la base de datos
-    //y devuelve valores que le pertenecen
-    function login($usuario, $clave) {
+    
+    function tablaTrabajador() {
+        //Consulta a la base de datos añade tabla 
         $this->db->select('*');
-        $this->db->where('rutusuario', $usuario);
-        $this->db->where('contraseña', $clave);
-        $datos = $this->db->get('usuario');
-        $data['usuario'] = "";
-        $data['rol'] = "";
-        $data['nombre'] = "";
-        $data['apellido'] = "";
-        foreach ($datos->result() as $fila) {
-            $data['usuario'] = $fila->rutusuario;
-            $data['rol'] = $fila->Rol_idRol;
-            $data['nombre'] = $fila->nombre;
-            $data['apellido'] = $fila->apellido;
-        }
-        return $data;
+        return $this->db->get('trabajador');
     }
+
 
     
     
@@ -68,7 +76,11 @@ class modelo extends CI_Model {
         $this->db->select('rutcliente, nombre');
         return $this->db->get('cliente');
     }
-    
+    function cargaProveedor() {
+        //Consulta a la base de datos añade tabla 
+        $this->db->select('*');
+        return $this->db->get('proveedor');
+    }
     
 function botonGuardarfactura(
 $numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
@@ -95,15 +107,30 @@ $this->db->insert('factura', $data);
 }
     
     
-     function tablaTrabajador() {
-        //Consulta a la base de datos añade tabla 
+     
+    
+    
+    
+//    -----------------clientes------------
+    function CargaRegion () {
+        //Consulta a la base de datos a ña tabla cargo
         $this->db->select('*');
-        return $this->db->get('trabajador');
+        return $this->db->get('region');
     }
+
+function CargaComuna () {
+        //Consulta a la base de datos a ña tabla cargo
+        $this->db->select('*');
+        return $this->db->get('comuna');
+    }
+
+//------------flujo caja-------------------
     
-    
-    
-    
+    function CargaItem () {
+        //Consulta a la base de datos a ña tabla cargo
+        $this->db->select('*');
+        return $this->db->get('item');
+    }
     
 }
 ?>

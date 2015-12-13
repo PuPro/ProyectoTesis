@@ -117,8 +117,8 @@ class Welcome extends CI_Controller {
     function vistaUsuario(){
         $this->load->view('usuario');
     }
-    function vistaSucursal(){
-        $this->load->view('sucursal');
+    function vistaEmpresa(){
+        $this->load->view('empresa');
     }
     function salir() {
         $this->session->sess_destroy();
@@ -130,8 +130,14 @@ class Welcome extends CI_Controller {
         $datos['facturaClientes'] = $this->modelo->cargaCliente()->result();
         $this->load->view('facturaClientes', $datos);
     }
-    
-    
+    function cargaSucursalFactura() {
+        $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
+        $this->load->view('sucursal', $datos);
+    }
+    function cargaProveedorfactura() {
+        $datos['proveedor'] = $this->modelo->cargaProveedor()->result();
+        $this->load->view('proveedor', $datos);
+    }
        
 //    ------------tabla trabajador------------------------------------
     
@@ -139,6 +145,47 @@ class Welcome extends CI_Controller {
         $datos['tablaTrabajador'] = $this->modelo->tablaTrabajador()->result();
         $this->load->view('tablaTrabajador', $datos);
     }
+    
+//    -------------------cmboxcliente------------
+    
+    function CargaRegion() {
+        $datos['region'] = $this->modelo->CargaRegion()->result();
+        $this->load->view('region', $datos);
+    }
+    
+    function cargaSucursalCliente() {
+        $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
+        $this->load->view('sucursal', $datos);
+    }
+    
+    function CargaComuna() {
+        $datos['comuna'] = $this->modelo->CargaComuna()->result();
+        $this->load->view('comuna', $datos);
+    }
+    
+    
+//    -----------------------flujo caja----------------
+    
+    function cargaSucursalFlujoCaja() {
+        $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
+        $this->load->view('sucursal', $datos);
+    }
+      function cargaItem() {
+        $datos['item'] = $this->modelo->CargaItem()->result();
+        $this->load->view('item', $datos);
+    }
+
+    
+//    --------------------administrador---------------
+    
+    
+     function cargaSucursalUsuarios() {
+        $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
+        $this->load->view('sucursal', $datos);
+    }
+    
+    
+    
     
     
 }

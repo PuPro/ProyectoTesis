@@ -14,10 +14,9 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="status" class="col-sm-3 control-label">ITEM *:</label>
-                            <div class="col-sm-9" required="true" id="ITEMFlujo">
-                                <select class="form-control" id="ITEMFlujo" name="ITEMFlujo">
-                                    <option>1</option>
-                                    <option>1</option>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="ITEMFlujo" 
+                                        name="ITEMFlujo" required="true">
                                 </select>
                             </div>
                         </div>

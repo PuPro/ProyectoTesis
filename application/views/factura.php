@@ -37,7 +37,7 @@
                             <div class="col-sm-6">
                                 <label for="status" class="col-sm-3 control-label">Proveedor *:</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" id="status" name="proveedorFactura">
+                                    <select class="form-control" id="proveedorFactura" name="proveedorFactura">
                                     </select>
                                 </div>
                             </div>
@@ -46,8 +46,8 @@
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label for="status" class="col-sm-3 control-label">Cliente *:</label>
-                                <div class="col-sm-9" id="clienteFactura">
-                                    <select class="form-control" id="status" name="clienteFactura">
+                                <div class="col-sm-9" >
+                                    <select class="form-control" id="clienteFactura" name="clienteFactura">
                                     </select>
                                 </div>
                             </div>
