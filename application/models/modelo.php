@@ -61,12 +61,18 @@ class modelo extends CI_Model {
         endif;
     }
 
-    function tablaTrabajador() {
+    function cargarTablaTrabajadores() {
         //Consulta a la base de datos añade tabla 
         $this->db->select('*');
         return $this->db->get('trabajador');
     }
-
+function eliminaTrabajador($ruttrabajador){
+    $this->db->where('ruttrabajador',$ruttrabajador);
+    $this->db->delete("trabajador");
+}
+    
+    
+    
 //    ------------------------facturas--------------------------
 
     function cargaCliente() {

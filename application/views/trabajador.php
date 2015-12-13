@@ -112,12 +112,10 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">TRABAJADORES</h3>
                     <div class="pull-right">
-                        <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> BUSCAR </button>
+                        <button class="btn btn-default btn-xs btn-filter" id="cargartablaTrabajador"><span class="glyphicon glyphicon-filter"></span> BUSCAR </button>
                     </div>
                 </div>
-                <table class="table" id="tablatrabaj" name="tablatrabaj">   
-                    
-                </table>
+                <div class="divCrud" id="divCrud"></div>
             </div>
         </div>
     </div>

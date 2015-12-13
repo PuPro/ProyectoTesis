@@ -177,9 +177,16 @@ class Welcome extends CI_Controller {
 
 //    ------------tabla trabajador------------------------------------
 
-    function tablaTrabajador() {
-        $datos['tablaTrabajador'] = $this->modelo->tablaTrabajador()->result();
-        $this->load->view('tablaTrabajador', $datos);
+    function actualizaTablaTrabajador() {
+        $datos=  $this->modelo->cargarTablaTrabajadores();
+        $data['cantidad'] = $datos->num_rows();
+        $data['resultado'] = $datos->result();
+        $this->load->view('tablaTrabajador', $data);
+    }
+    
+    function eliminaTrabajador(){
+        $ruttrabajador = $this->input->post("ruttrabajador");
+        $this->modelo->eliminaTrabajador($ruttrabajador);
     }
 
 //    -------------------cmboxcliente------------

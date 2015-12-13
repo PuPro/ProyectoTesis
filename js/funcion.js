@@ -1,5 +1,6 @@
 $(document).ready(function () {
     validaLogin();
+    
     $("#modalMensaje").dialog({
         autoOpen: false,
         modal: true,
@@ -130,12 +131,17 @@ function trabajador() {
                 //Carga de combobox
                 cargaCargo();
                 cargaSucursal();
+               
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
                 $("#btnagregarTrabajador").button().click(function () {
                     btnaagregartrabajador();
+                });
+                
+                 $("#cargartablaTrabajador").button().click(function () {
+                    actualizarTablaTrabajador();
                 });
             });
 }
@@ -916,12 +922,30 @@ function cargaRolUsuario() {
 
 
 //    tabla trabajador------------------
-function tablaTrabajador() {
+function actualizarTablaTrabajador() {
+ 
     //llama a la funcion que se encuentra el el welcome
-    $.post(base_url + "Welcome/tablaTrabajador",
+    $.post(base_url + "Welcome/actualizaTablaTrabajador",
             {},
-            function (ruta, datos) {
+            function (pagina, datos) {
                 //Se cargan los datos que vienen de cargarCargo del welcome
-                $("#tablatrabaj").html(ruta, datos);
+                
+                $(".divCrud").hide();
+                $(".divCrud").fadeIn(1000).delay(1000);
+                $(".divCrud").html(pagina,datos);
+                
+//                $("#divCrud").html(pagina, datos);
             });
+}
+
+function eliminarTrabajador(ruttrabajador){
+    $.post(base_url + "Welcome/eliminaTrabajador",
+    {ruttrabajador:ruttrabajador},
+    function(){
+        actualizarTablaTrabajador();
+        
+    }
+            );
+    
+    
 }
