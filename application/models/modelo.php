@@ -87,29 +87,30 @@ class modelo extends CI_Model {
         return $this->db->get('material');
     }
 
-//    function Guardarfactura(
-//    $numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
-//        $this->db->select('idfactura');
-//        $this->db->where('numeroFactura', $numeroFactura);
-//        $cantidad = $this->db->get('factura')->num_rows();
-//        if ($cantidad == 0):
-//            $data = array(
-//                'numerofactura' => $numeroFactura,
-//                'fecha_emision' => $Fecha_ingresoFactura,
-//                'fecha_vencimiento' => $Fecha_vencimientoFactura,
-//                'valorneto' => $valorneto,
-//                'valortotal' => $valortotal,
-//                'iva' => $iva,
-//                'cliente_rutcliente' => $clienteFactura,
-//                'empresa_rutempresa' => $SucursalFactura,
-//                'usuario_rutusuario' => $rutusuario,
-//                'proveedor_rutproveedor' => $proveedorFactura,);
-//            $this->db->insert('factura', $data);
-//            return 0;
-//        else:
-//            return 1;
-//        endif;
-//    }
+    function Guardarfactura(
+    $numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
+        $this->db->select('numerofactura');
+        $this->db->where('numeroFactura', $numeroFactura);
+        $cantidad = $this->db->get('factura')->num_rows();
+        if ($cantidad == 0):
+            $data = array(
+                'numerofactura' => $numeroFactura,
+                'fecha_emision' => $Fecha_ingresoFactura,
+                'fecha_vencimiento' => $Fecha_vencimientoFactura,
+                'valorneto' => $valorneto,
+                'valortotal' => $valortotal,
+                'iva' => $iva,
+                'cliente_rutcliente' => $clienteFactura,
+                'empresa_rutempresa' => $SucursalFactura,
+                'usuario_rutusuario' => $rutusuario,
+                'proveedor_rutproveedor' => $proveedorFactura,);
+            $this->db->insert('factura', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
 //    -----------------clientes------------
     function CargaRegion() {
         //Consulta a la base de datos a ña tabla cargo
@@ -173,5 +174,56 @@ class modelo extends CI_Model {
     }
 
 }
+
+//-----------------admin---------------------
+
+function CargaRol() {
+        //Consulta a la base de datos a ña tabla rol
+        $this->db->select('*');
+        return $this->db->get('rol');
+    }
+
+function GuardarUsuario($RutUsuario, $NombresUsuario, $ApellidoUsuario, $RolUsuario, $SucursalUsuario, $contraseñaUsuario) {
+
+    $this->db->select('rutusuario');
+    $this->db->where('rutusuario', $RutUsuario);
+    $cantidad = $this->db->get('usuario')->num_rows();
+    if ($cantidad == 0):
+        $data = array(
+            'rutusuario' => $RutUsuario,
+            'nombre' => $NombresUsuario,
+            'apellido' => $ApellidoUsuario,
+            'Rol_idRol' => $RolUsuario,
+            'empresa_rutempresa' => $SucursalUsuario,
+            'contraseña' => $contraseñaUsuario,);
+        $this->db->insert('usuario', $data);
+        return 0;
+    else:
+        return 1;
+    endif;
+}
+
+
+function GuardarEmpresa($RutEmpresa, $NombresEmpresa, $DireccionEmpresa, $TelefonoEmpresa, $CorreoElectronicoEmpresa) {
+
+    $this->db->select('rutusuario');
+    $this->db->where('rutusuario', $RutEmpresa);
+    $cantidad = $this->db->get('empresa')->num_rows();
+    if ($cantidad == 0):
+        $data = array(
+            'rutusuario' => $RutEmpresa,
+            'nombre' => $NombresEmpresa,
+            'apellido' => $DireccionEmpresa,
+            'Rol_idRol' => $TelefonoEmpresa,       
+            'contraseña' => $CorreoElectronicoEmpresa,);
+        $this->db->insert('empresa', $data);
+        return 0;
+    else:
+        return 1;
+    endif;
+}
+
+
+
 ?>
 

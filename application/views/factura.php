@@ -170,7 +170,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <hr style="border:1px dashed #dddddd;">
-                <button type="button" class="btn btn-primary btn-block">GUARDAR Y FINALIZAR</button>
+                <button type="submit"  class="btn btn-primary btn-block" id="btnagregarFactura">GUARDAR Y FINALIZAR</button>
             </div>                
         </div>
     </div>

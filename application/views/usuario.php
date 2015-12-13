@@ -26,12 +26,12 @@
                             <input type="text" class="form-control" id="ApellidoUsuario" name="ApellidoUsuario">
                         </div>
                     </div>
-
+                    
                     <div class="col-sm-6">
-                        <label for="status" class="col-sm-3 control-label">Cargo *:</label>
+                        <label for="status" class="col-sm-3 control-label">Rol *:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="CargoUsuario" 
-                                    name="CargoUsuario" required="true">
+                            <select class="form-control" id="RolUsuario" 
+                                    name="RolUsuario" required="true">
                             </select>
                         </div>
                     </div>
@@ -45,7 +45,14 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <label for="concept" class="col-sm-3 control-label">Contraseña *:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="contraseñaUsuario" name="contraseñaUsuario">
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="form-group">
                     <div class="col-sm-3">
                         <p class= "help-block">* Campos Obligatorios</p>

@@ -249,10 +249,10 @@ function cliente() {
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
                 $("#btnagregarCliente").button().click(function () {
-                   btnaagregarcliente();
+                    btnaagregarcliente();
                 });
-                
-                
+
+
             });
 }
 
@@ -358,8 +358,114 @@ function factura() {
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
+                $("#btnagregarFactura").button().click(function () {
+                    btnaagregarfactura();
+                });
+
             });
 }
+
+function btnaagregarfactura() {
+    //Se almacenan los datos en las variables declaradas.
+    //con el .val() se obtiene el valor del los input
+    var NumeroFactura = $("#numeroFactura").val();
+    var FechaIngreso = $("#Fecha_ingresoFactura").val();
+    var FechaVencimiento = $("#Fecha_vencimientoFactura").val();
+    var Neto = $("#valorneto").val();
+    var Total = $("#valortotal").val();
+    var Iva = $("iva").val();
+    var Cliente = $("#clienteFactura").val();
+    var Sucursal = $("#SucursalFactura").val();
+    var RutUsuario = $("#rutusuario").val();
+    var Proveedor = $("#proveedorFactura").val();
+    var mensaje = "<strong id='tituloError'>Error:</strong> <br>";
+    var error = 0;
+
+    $("#numeroFactura").focus();
+
+//validacion de campos vacios
+    if (NumeroFactura == "") {
+        mensaje += "Numero Factura no valido.<br>";
+        error++;
+    }
+
+    if (FechaIngreso == "") {
+        mensaje += "Fecha Ingreso no valido.<br>";
+        error++;
+    }
+
+    if (FechaVencimiento == "") {
+        mensaje += "Fecha Vencimiento no valido.<br>";
+        error++;
+    }
+
+    if (Neto == "") {
+        mensaje += "Neto no valido.<br>";
+        error++;
+    }
+
+    if (Total == "") {
+        mensaje += "Total no valida.<br>";
+        error++;
+    }
+
+    if (Iva == "") {
+        mensaje += "Iva no valida.<br>";
+        error++;
+    }
+
+    if (Cliente == "") {
+        mensaje += "Cliente no valido.<br>";
+        error++;
+    }
+
+    if (Sucursal == "") {
+        mensaje += "Sucursal no valido.<br>";
+        error++;
+    }
+    if (RutUsuario == "") {
+        mensaje += "Rut Usuario no valido.<br>";
+        error++;
+    }
+    if (Proveedor == "") {
+        mensaje += "Proveedor no valido.<br>";
+        error++;
+    }
+
+    if (error != 0) {
+        $("#modalMensaje").html("<p class='msjError'>" + mensaje + "</p>");
+        $("#modalMensaje").dialog("open");
+    } else {
+
+        $.post(base_url + "welcome/btnuevofactura",
+                {
+                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                    //Variable de color negra Es el valor capturado
+
+                    NumeroFactura: NumeroFactura,
+                    FechaIngreso: FechaIngreso,
+                    FechaVencimiento: FechaVencimiento,
+                    Neto: Neto,
+                    Total: Total,
+                    Iva: Iva,
+                    Cliente: Cliente,
+                    Sucursal: Sucursal,
+                    RutUsuario: RutUsuario,
+                    Proveedor: Proveedor
+                },
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Factura ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Factura agregado correctamente</p>");
+                        factura();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
+                );
+    }
+}
+
 
 function material() {
 
@@ -386,7 +492,7 @@ function flujoCaja() {
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
                 $("#btnagregarFlujoCaja").button().click(function () {
-                   btnaagregarflujocaja();
+                    btnaagregarflujocaja();
                 });
             });
 }
@@ -445,7 +551,6 @@ function btnaagregarflujocaja() {
                     Sucursal: Sucursal,
                     Monto: Monto,
                     Descripcion: Descripcion,
-                   
                 },
                 function (datos) {
                     if (datos.valor == 1) {
@@ -497,7 +602,7 @@ function comparacion() {
                 $(".aplicacion").html(pagina);
             });
 }
-//vistas menu admin
+//---------vistas menu admin---------------
 
 function usuario() {
 
@@ -506,13 +611,93 @@ function usuario() {
             {},
             function (pagina) {
                 cargaSucursalUsuarios();
-                cargaCargoUsuarios()
+                cargaRolUsuario();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
+                $("#btnAgregarUsuario").button().click(function () {
+                    btnaagregarusuario();
+                });
+
             });
 }
+
+function btnaagregarusuario() {
+    //Se almacenan los datos en las variables declaradas.
+    //con el .val() se obtiene el valor del los input
+    var RutUsuario = $("#RutUsuario").val();
+    var NombresUsuario = $("#NombresUsuario").val();
+    var ApellidosUsuario = $("#ApellidoUsuario").val();
+    var Rol = $("#RolUsuario").val();
+    var SucursalUsuario = $("#SucursalUsuario").val();
+    var Contraseña = $("#contraseñaUsuario").val();
+    var mensaje = "<strong id='tituloError'>Error:</strong> <br>";
+    var error = 0;
+
+    $("#RutUsuario").focus();
+
+//validacion de campos vacios
+    if (RutUsuario == "") {
+        mensaje += "Rut Usuario no valido.<br>";
+        error++;
+    }
+
+    if (NombresUsuario == "") {
+        mensaje += "Nombre(s)Usuario no valido.<br>";
+        error++;
+    }
+
+    if (ApellidosUsuario == "") {
+        mensaje += "Apellido(s) Usuario no valido.<br>";
+        error++;
+    }
+
+    if (Rol == "") {
+        mensaje += "Rol no valido.<br>";
+        error++;
+    }
+
+    if (SucursalUsuario == "") {
+        mensaje += "Sucursal Usuario no valida.<br>";
+        error++;
+    }
+
+    if (Contraseña == "") {
+        mensaje += "Contraseña no valida.<br>";
+        error++;
+    }
+
+    if (error != 0) {
+        $("#modalMensaje").html("<p class='msjError'>" + mensaje + "</p>");
+        $("#modalMensaje").dialog("open");
+    } else {
+
+        $.post(base_url + "Welcome/btnuevousuario",
+                {
+                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                    //Variable de color negra Es el valor capturado
+                    RutUsuario: RutUsuario,
+                    NombresUsuario: NombresUsuario,
+                    ApellidosUsuario: ApellidosUsuario,
+                    Rol: Rol,
+                    SucursalUsuario: SucursalUsuario,
+                    Contraseña: Contraseña,
+                },
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Usuario ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Usuario agregado correctamente</p>");
+                        usuario();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
+                );
+    }
+}
+
+
 function Empresa() {
 
     $.post(
@@ -523,8 +708,81 @@ function Empresa() {
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
+                $("#btnAgregarEmpresa").button().click(function () {
+                    btnaagregarempresa();
+                });
             });
 }
+
+
+function btnaagregarempresa() {
+    //Se almacenan los datos en las variables declaradas.
+    //con el .val() se obtiene el valor del los input
+    var RutEmpresa = $("#RutEmpresa").val();
+    var NombresEmpresa = $("#NombresEmpresa").val();
+    var DireccionEmpresa = $("DireccionEmpresa").val();
+    var TelefonoEmpresa = $("#TelefonoEmpresa").val();
+    var CorreoElectronicoEmpresa = $("#CorreoElectronicoEmpresa").val();
+    var mensaje = "<strong id='tituloError'>Error:</strong> <br>";
+    var error = 0;
+
+    $("#RutEmpresa").focus();
+
+//validacion de campos vacios
+    if (RutEmpresa == "") {
+        mensaje += "Rut Empresa no valido.<br>";
+        error++;
+    }
+
+    if (NombresEmpresa == "") {
+        mensaje += "Nombre Empresa no valido.<br>";
+        error++;
+    }
+
+    if (DireccionEmpresa == "") {
+        mensaje += "Direccion Empresa no valido.<br>";
+        error++;
+    }
+
+    if (TelefonoEmpresa == "") {
+        mensaje += "Telefono Empresa no valido.<br>";
+        error++;
+    }
+
+    if (CorreoElectronicoEmpresa == "") {
+        mensaje += "E-mail no valida.<br>";
+        error++;
+    }
+
+
+    if (error != 0) {
+        $("#modalMensaje").html("<p class='msjError'>" + mensaje + "</p>");
+        $("#modalMensaje").dialog("open");
+    } else {
+
+        $.post(base_url + "Welcome/btnuevoempresa",
+                {
+                    //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                    //Variable de color negra Es el valor capturado
+                    RutEmpresa: RutEmpresa,
+                    NombresEmpresa: NombresEmpresa,
+                    DireccionEmpresa: DireccionEmpresa,
+                    TelefonoEmpresa: TelefonoEmpresa,
+                    CorreoElectronicoEmpresa: CorreoElectronicoEmpresa,
+                },
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Empresa ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Empresa agregado correctamente</p>");
+                        Empresa();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
+                );
+    }
+}
+
 function salir() {
     $.post(
             base_url + "Welcome/salir", {},
@@ -536,7 +794,6 @@ function salir() {
 
 }
 
-//-----------------facturas------------------------------
 
 
 
@@ -647,13 +904,13 @@ function cargaSucursalUsuarios() {
                 $("#SucursalUsuario").html(ruta, datos);
             });
 }
-function cargaCargoUsuarios() {
+function cargaRolUsuario() {
     //llama a la funcion que se encuentra el el welcome
-    $.post(base_url + "Welcome/cargaCargoUsuarios",
+    $.post(base_url + "Welcome/CargaRol",
             {},
             function (ruta, datos) {
                 //Se cargan los datos que vienen de cargarCargo del welcome
-                $("#CargoUsuario").html(ruta, datos);
+                $("#RolUsuario").html(ruta, datos);
             });
 }
 

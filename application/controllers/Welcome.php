@@ -154,6 +154,27 @@ class Welcome extends CI_Controller {
         $this->load->view('cargaMaterial', $datos);
     }
 
+    function btnuevofactura() {
+        $numeroFactura = $this->input->post('NumeroFactura');
+        $Fecha_ingresoFactura = $this->input->post('FechaIngreso');
+        $Fecha_vencimientoFactura = $this->input->post('FechaVencimiento');
+        $valorneto = $this->input->post('Neto');
+        $valortotal = $this->input->post('Total');
+        $iva = $this->input->post('Iva');
+        $clienteFactura = $this->input->post('Cliente');
+        $SucursalFactura = $this->input->post('Sucursal');
+        $rutusuario = $this->input->post('RutUsuario');
+        $proveedorFactura = $this->input->post('Proveedor');
+        $valor = 1;
+
+        if ($this->modelo->Guardarfactura
+                        ($numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) == 0) {
+            $valor = 0;
+        }
+        //Se imprime la variable valor enviandolo al archivo funcion
+        echo json_encode(array('valor' => $valor));
+    }
+
 //    ------------tabla trabajador------------------------------------
 
     function tablaTrabajador() {
@@ -217,7 +238,7 @@ class Welcome extends CI_Controller {
         $ITEMFlujo = $this->input->post('ItemFlujo');
         $SucursalFlujo = $this->input->post('Sucursal');
         $MontoTotalFlujo = $this->input->post('Monto');
-        $DescripcionFlujo = $this->input->post('Descripcion');        
+        $DescripcionFlujo = $this->input->post('Descripcion');
         $valor = 1;
 
         if ($this->modelo->GuardarFlujoCaja
@@ -227,8 +248,7 @@ class Welcome extends CI_Controller {
         //Se imprime la variable valor enviandolo al archivo funcion
         echo json_encode(array('valor' => $valor));
     }
-    
-    
+
 //    --------------------administrador---------------
 
 
@@ -237,9 +257,44 @@ class Welcome extends CI_Controller {
         $this->load->view('sucursal', $datos);
     }
 
-    function cargaCargoUsuarios() {
-        $datos['cargo'] = $this->modelo->CargaSucursal()->result();
-        $this->load->view('cargo', $datos);
+    function CargaRol() {
+        $datos['rol'] = $this->modelo->CargaRol()->result();
+        $this->load->view('rol', $datos);
+    }
+
+    function btnuevousuario() {
+
+        $RutUsuario = $this->input->post('RutUsuario');
+        $NombresUsuario = $this->input->post('NombresUsuario');
+        $ApellidoUsuario = $this->input->post('ApellidosUsuario');
+        $RolUsuario = $this->input->post('Rol');
+        $SucursalUsuario = $this->input->post('SucursalUsuario');
+        $contraseñaUsuario = $this->input->post('Contraseña');
+
+        $valor = 1;
+
+        if ($this->modelo->GuardarUsuario
+                        ($RutUsuario, $NombresUsuario, $ApellidoUsuario, $RolUsuario, $SucursalUsuario, $contraseñaUsuario) == 0) {
+            $valor = 0;
+        }
+        //Se imprime la variable valor enviandolo al archivo funcion
+        echo json_encode(array('valor' => $valor));
+    }
+
+    function btnuevoempresa() {
+        $RutEmpresa = $this->input->post('RutEmpresa');
+        $NombresEmpresa = $this->input->post('NombresEmpresa');
+        $DireccionEmpresa = $this->input->post('DireccionEmpresa');
+        $TelefonoEmpresa = $this->input->post('TelefonoEmpresa');
+        $CorreoElectronicoEmpresa = $this->input->post('CorreoElectronicoEmpresa');
+        $valor = 1;
+
+        if ($this->modelo->GuardarEmpresa
+                        ($RutEmpresa, $NombresEmpresa, $DireccionEmpresa, $TelefonoEmpresa, $CorreoElectronicoEmpresa) == 0) {
+            $valor = 0;
+        }
+        //Se imprime la variable valor enviandolo al archivo funcion
+        echo json_encode(array('valor' => $valor));
     }
 
 }
