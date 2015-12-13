@@ -126,38 +126,6 @@
                         <th><input type="text" class="form-control" placeholder="Fecha ingreso" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Estado" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Cargo" disabled></th>
-
-                    </tr>
-                    <tr>
-                        <td>12345678-9</td>
-                        <td>jose jose</td>
-                        <td>madera madera</td>
-                        <td>99999999</td>
-                        <td>jd # 12</td>
-                        <td>12/12/12</td>
-                        <td>activo</td>
-                        <td>supervisor</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>ventana</td>
-                        <td>metal</td>
-                        <td>2</td>
-                        <td>ventana</td>
-                        <td>metal</td>
-                        <td>ventana</td>
-                        <td>metal</td>
-
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>reja</td>
-                        <td>fierro</td>
-                        <td>fierro</td>
-                        <td>3</td>
-                        <td>reja</td>
-                        <td>fierro</td>
-                        <td>fierro</td>
                     </tr>
                 </table>
             </div>

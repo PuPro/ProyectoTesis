@@ -132,7 +132,13 @@ class Welcome extends CI_Controller {
     }
     
     
+       
+//    ------------tabla trabajador------------------------------------
     
+    function tablaTrabajador() {
+        $datos['tablaTrabajador'] = $this->modelo->tablaTrabajador()->result();
+        $this->load->view('tablaTrabajador', $datos);
+    }
     
     
 }

@@ -316,3 +316,13 @@ function cargaCliente() {
     
 }
 
+//    tabla trabajador------------------
+    function tablaTrabajador() {
+        //llama a la funcion que se encuentra el el welcome
+        $.post(base_url + "Welcome/tablaTrabajador",
+                {},
+                function (ruta, datos) {
+                    //Se cargan los datos que vienen de cargarCargo del welcome
+                    $("#tablatrabaj").html(ruta, datos);
+                });
+    }

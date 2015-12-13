@@ -95,7 +95,11 @@ $this->db->insert('factura', $data);
 }
     
     
-    
+     function tablaTrabajador() {
+        //Consulta a la base de datos añade tabla 
+        $this->db->select('*');
+        return $this->db->get('trabajador');
+    }
     
     
     
