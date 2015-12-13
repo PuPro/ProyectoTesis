@@ -1,11 +1,10 @@
 $(document).ready(function () {
     validaLogin();
     $("#modalMensaje").dialog({
-        modal: true,
         autoOpen: false,
-        width: 350,
+        modal: true,
         buttons: {
-            "cerrar": function () {
+            "Cerrar": function () {
                 $(this).dialog("close");
             }
         }
@@ -142,8 +141,6 @@ function trabajador() {
 }
 
 function btnaagregartrabajador() {
-    //estadoBotones();
-//
     //Se almacenan los datos en las variables declaradas.
     //con el .val() se obtiene el valor del los input
     var Rut = $("#RutTrabajador").val();
@@ -155,57 +152,59 @@ function btnaagregartrabajador() {
     var Estado = $("#EstadoTrabajador").val();
     var Cargo = $("#CargoTrabajador").val();
     var Sucursal = $("#SucursalTrabajador").val();
-    var mensaje = "Error: ";
+    var mensaje = "<strong id='tituloError'>Error:</strong> <br>";
     var error = 0;
+
+    $("#RutTrabajador").focus();
 
 //validacion de campos vacios
     if (Rut == "") {
-        mensaje += "Debe ingresar un rut";
+        mensaje += "Rut no valido.<br>";
         error++;
     }
 
     if (Nombres == "") {
-        mensaje += "Debe ingresar un nombre(s)";
+        mensaje += "Nombre(s) no valido.<br>";
         error++;
     }
 
     if (Apellidos == "") {
-        mensaje += "Debe ingresar un apellido(s)";
+        mensaje += "Apellido(s) no valido.<br>";
         error++;
     }
 
     if (Telefono == "") {
-        mensaje += "Debe ingresar un teléfono";
+        mensaje += "Teléfono no valido.<br>";
         error++;
     }
 
     if (Direccion == "") {
-        mensaje += "Debe ingresar una direccion";
+        mensaje += "Direccion no valida.<br>";
         error++;
     }
 
     if (FechaIngreso == "") {
-        mensaje += "Debe ingresar una fecha de ingreso";
+        mensaje += "Fecha de ingreso no valida.<br>";
         error++;
     }
 
     if (Estado == "") {
-        mensaje += "Debe ingresar un estado";
+        mensaje += "Estado no valido.<br>";
         error++;
     }
 
     if (Cargo == "") {
-        mensaje += "Debe ingresar un cargo";
+        mensaje += "Cargo no valido.<br>";
         error++;
     }
 
     if (Sucursal == "") {
-        mensaje += "Debe ingresar una sucursal";
+        mensaje += "Sucursal no valida.<br>";
         error++;
     }
 
     if (error != 0) {
-        $("#modalMensaje").html("<p class=msjError>" + mensaje + "</p>");
+        $("#modalMensaje").html("<p class='msjError'>" + mensaje + "</p>");
         $("#modalMensaje").dialog("open");
     } else {
 
@@ -225,10 +224,12 @@ function btnaagregartrabajador() {
                 },
         function (datos) {
             if (datos.valor == 1) {
-                alert("Trabajador ya existe");
+                $("#modalMensaje").html("<p class='msjError'>Trabajador ya existente</p>");
             } else {
-                alert("Trabajador agregado correctamente");
+                $("#modalMensaje").html("<p class='msjOk'>Trabajador agregado correctamente</p>");
+                trabajador();
             }
+            $("#modalMensaje").dialog("open");
         }, 'json'//Formato en el que se enviaran los datos
                 );
     }
@@ -354,9 +355,9 @@ function salir() {
                 validaLogin();
             }
     );
-    
-}  
-    
+
+}
+
 //-----------------facturas------------------------------
 function cargaCliente() {
     //llama a la funcion que se encuentra el el welcome
@@ -366,6 +367,6 @@ function cargaCliente() {
                 //Se cargan los datos que vienen de cargarCargo del welcome
                 $("#clienteFactura").html(ruta, datos);
             });
-    
+
 }
 

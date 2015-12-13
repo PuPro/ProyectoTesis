@@ -138,9 +138,9 @@ class Welcome extends CI_Controller {
     function salir() {
         $this->session->sess_destroy();
     }
-<<<<<<< HEAD
 
-=======
+
+
     
     
 //    ------------------facturas---------------------
@@ -151,7 +151,5 @@ class Welcome extends CI_Controller {
     
     
     
-    
-    
->>>>>>> origin/master
+
 }

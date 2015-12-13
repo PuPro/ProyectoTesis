@@ -35,9 +35,9 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="status" class="col-sm-3 control-label">Proveedor *:</label>
+                                <label for="concept" class="col-sm-3 control-label">Proveedor *:</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" id="status" name="proveedorFactura">
+                                    <select class="form-control" id="proveedorFactura" name="proveedorFactura">
                                     </select>
                                 </div>
                             </div>
@@ -45,15 +45,16 @@
 
                         <div class="form-group">
                             <div class="col-sm-6">
-                                <label for="status" class="col-sm-3 control-label">Cliente *:</label>
-                                <div class="col-sm-9" id="clienteFactura">
-                                    <select class="form-control" id="status" name="clienteFactura">
+                                <label for="concept" class="col-sm-3 control-label">Cliente *:</label>
+                                <div class="col-sm-9" >
+                                    <select class="form-control" id="clienteFactura" 
+                                            name="clienteFactura" required="true">
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
-                                <label for="status" class="col-sm-3 control-label">Sucursal *:</label>
+                                <label for="concept" class="col-sm-3 control-label">Sucursal *:</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="SucursalFactura" 
                                             name="SucursalFactura" required="true">
@@ -63,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6">
-                                <label for="status" class="col-sm-3 control-label">Usuario *:</label>
+                                <label for="concept" class="col-sm-3 control-label">Usuario *:</label>
                                 <div class="col-sm-9" id="usuarioFactura">
                                     <input type="text" class="form-control" id="Fecha_vencimientoFactura"
                                            name="Fecha_vencimientoFactura" required="true"disabled="true">
