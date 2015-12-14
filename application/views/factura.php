@@ -68,8 +68,16 @@
                                     <label for="concept" class="col-sm-3 control-label">Usuario *:</label>
                                     <div class="col-sm-9" id="rutusuario">
                                         <input type="text" class="form-control" 
-                                               value="<?php echo $this->session->userdata('usuario');?>" id="rutusuario"
+                                               value="<?php echo $this->session->userdata('usuario'); ?>" id="rutusuario"
                                                name="usuario" required="true" disabled="true">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <label for="concept" class="col-sm-3 control-label">Trabajador *:</label>
+                                    <div class="col-sm-9" >
+                                        <select class="form-control" id="TrabajadorFactura" 
+                                                name="TrabajadorFactura" required="true"></select>
                                     </div>
                                 </div>
                             </div>
@@ -117,12 +125,7 @@
                             <input type="number" class="form-control" id="valor" name="valor">
                         </div>
                     </div> 
-                    <div class="form-group">
-                        <label for="concept" class="col-sm-3 control-label">Total</label>
-                        <div class="col-sm-9">
-                            <strong><span class="preview-cantTemporal" id="total" name="total"></span></strong>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
                             <button type="submit" class="btn btn-default preview-add-button" id="btnAgregarFactura">
@@ -157,10 +160,9 @@
             </div>
             <div class="row text-right">
                 <div class="col-xs-12">
-                    <h4>Sub Total: <strong><span class="preview-total"></span></strong></h4>
-                    <h4>IVA (19%): <strong><span class="preview-iva"></span></strong></h4>
-                    <h4>Total: <strong><span class=""></span></strong></h4>
-                    <h4>Total: <strong><span class="preview-cant"></span></strong></h4>
+                    <h4>Sub Total: <strong><span class="preview-totalTempotal"></span></strong></h4>
+                    <h4>IVA (19%): <strong><span class="preview-cantTemporal"></span></strong></h4>
+                    <h4>Total: <strong><span class=""></span></strong></h4> 
                 </div>
             </div>
             <div class="row">

@@ -33,7 +33,7 @@
                         <div class="col-sm-6">
                             <label for="concept" class="col-sm-3 control-label">Monto Total *: </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="MontoTotal Flujo" 
+                                <input type="text" class="form-control" id="MontoTotalFlujo" 
                                        name="MontoTotalFlujo" required="true" placeholder="Ingrese monto...">
                             </div>
                         </div>
@@ -52,9 +52,9 @@
                             <p class= "help-block">* Campos Obligatorios</p>
                         </div>
                         <div class="col-sm-9 text-right">
-                            <button type="button" class="btn btn-default preview-add-button">
-                                <span class="glyphicon glyphicon-plus"></span> AGREGAR
-                            </button>
+                            <button type="submit" id="btnagregarFlujoCaja" 
+                                class="btn btn-default preview-add-button"><span class="glyphicon glyphicon-plus" ></span> AGREGAR
+                        </button>
                         </div>
                     </div>
                 </div>

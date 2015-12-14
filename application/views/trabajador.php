@@ -103,7 +103,20 @@
     </div>  
 </div> <!-- / fin menu --> 
 
-<div id="tablaTrabajador">
-    
+<div class="container ">
+    <div class="col-sm-12 "> 
+        <h2></h2>
+        <!--busqueda-->
+        <div class="row">
+            <div class="panel panel-primary filterable">
+                <div class="panel-heading">
+                    <h3 class="panel-title">TRABAJADORES</h3>
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-xs btn-filter" id="cargartablaTrabajador"><span class="glyphicon glyphicon-filter"></span> BUSCAR </button>
+                    </div>
+                </div>
+                <div class="divCrud" id="divCrud"></div>
+            </div>
+        </div>
+    </div>
 
-</div>

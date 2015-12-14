@@ -1,5 +1,6 @@
 $(document).ready(function () {
     validaLogin();
+
     $("#modalMensaje").dialog({
         autoOpen: false,
         modal: true,
@@ -57,26 +58,6 @@ $(document).ready(function () {
 });
 
 
-//Carga el combobox cargo
-function cargaCargo() {
-    //llama a la funcion que se encuentra el el welcome
-    $.post(base_url + "Welcome/CargaCargo",
-            {},
-            function (ruta, datos) {
-                //Se cargan los datos que vienen de cargarCargo del welcome
-                $("#CargoTrabajador").html(ruta, datos);
-            });
-}
-
-function cargaSucursal() {
-    //llama a la funcion que se encuentra el el welcome
-    $.post(base_url + "Welcome/cargaSucursal",
-            {},
-            function (ruta, datos) {
-                //Se cargan los datos que vienen de cargarCargo del welcome
-                $("#SucursalTrabajador").html(ruta, datos);
-            });
-}
 
 //Carga login al contenido
 function validaLogin() {
@@ -109,17 +90,17 @@ function botonLogin() {
                 usuario: $("#Username").val(),
                 contraseña: $("#Password").val()
             },
-    function (datos) {
-        if (datos.mensaje != "") {
-            $("#mensajeLogin").html("<p class='msjError'>" + datos.mensaje + "</p>").fadeIn(100).delay(600).fadeOut(1000);
-        } else {
-            validaLogin();
-        }
-    }, 'json'
+            function (datos) {
+                if (datos.mensaje != "") {
+                    $("#mensajeLogin").html("<p class='msjError'>" + datos.mensaje + "</p>").fadeIn(100).delay(600).fadeOut(1000);
+                } else {
+                    validaLogin();
+                }
+            }, 'json'
             );
 }
 
-//cargar vistas en menu usuario
+//trabajador
 function trabajador() {
 
     $.post(
@@ -129,13 +110,18 @@ function trabajador() {
                 //Carga de combobox
                 cargaCargo();
                 cargaSucursal();
-                tablaTrabajador();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
                 $("#btnagregarTrabajador").button().click(function () {
                     btnaagregartrabajador();
+
+                });
+
+                $("#cargartablaTrabajador").button().click(function () {
+                    actualizarTablaTrabajador();
+
                 });
             });
 }
@@ -222,19 +208,20 @@ function btnaagregartrabajador() {
                     Cargo: Cargo,
                     Sucursal: Sucursal
                 },
-        function (datos) {
-            if (datos.valor == 1) {
-                $("#modalMensaje").html("<p class='msjError'>Trabajador ya existente</p>");
-            } else {
-                $("#modalMensaje").html("<p class='msjOk'>Trabajador agregado correctamente</p>");
-                trabajador();
-            }
-            $("#modalMensaje").dialog("open");
-        }, 'json'//Formato en el que se enviaran los datos
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Trabajador ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Trabajador agregado correctamente</p>");
+                        trabajador();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
                 );
     }
 }
 
+//cliente
 
 function cliente() {
 
@@ -332,6 +319,7 @@ function btnaagregarcliente() {
                     Comuna: Comuna,
                     Sucursal: Sucursal
                 },
+
         function (datos) {
             if (datos.valor == 1) {
                 $("#modalMensaje").html("<p class='msjError'>Cliente ya existente</p>");
@@ -345,6 +333,7 @@ function btnaagregarcliente() {
     }
 }
 
+//factura
 function factura() {
 
     $.post(
@@ -355,7 +344,7 @@ function factura() {
                 cargaSucursalFactura();
                 cargaProveedorfactura();
                 cargaMaterial();
-
+                cargaTrabajador();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -407,6 +396,10 @@ function btnAgregarDetallefactura() {
             tr.fadeOut(200, function () {
                 tr.remove();
                 calc_total();
+                $("#btnagregarFactura").button().click(function () {
+                    btnaagregarfactura();
+                });
+
 
             });
         });
@@ -416,7 +409,7 @@ function btnAgregarDetallefactura() {
         form_data["materialFactura"] = $('.payment-form #MaterialFactura option:selected').val();
         form_data["cantidad"] = parseFloat($('.payment-form input[name="cantidad"]').val());
         form_data["valor"] = parseFloat($('.payment-form input[name="valor"]').val());
-        form_data["total"] = retornoValor();
+       form_data["total"] = parseFloat($('.payment-form input[name="total"]').val());
         form_data["remove-row"] = '<span class="glyphicon glyphicon-remove"></span>';
         var row = $('<tr></tr>');
         $.each(form_data, function (type, value) {
@@ -427,7 +420,6 @@ function btnAgregarDetallefactura() {
         cantidades();
     }
 }
-
 function isNumeric(numero) {
     return !isNaN(numero) && isFinite(numero);
 }
@@ -533,6 +525,8 @@ function btnaAgregarfactura() {
 }
 
 
+//material
+
 function material() {
 
     $.post(
@@ -545,6 +539,7 @@ function material() {
                 $(".aplicacion").html(pagina);
             });
 }
+//flujocaja
 function flujoCaja() {
 
     $.post(
@@ -631,6 +626,7 @@ function btnaagregarflujocaja() {
     }
 }
 
+//perI
 
 function perIngreso() {
 
@@ -644,6 +640,7 @@ function perIngreso() {
                 $(".aplicacion").html(pagina);
             });
 }
+//perE
 function perEgreso() {
 
     $.post(
@@ -656,6 +653,7 @@ function perEgreso() {
                 $(".aplicacion").html(pagina);
             });
 }
+//Comparacion
 function comparacion() {
 
     $.post(
@@ -780,7 +778,6 @@ function Empresa() {
             });
 }
 
-
 function btnaagregarempresa() {
     //Se almacenan los datos en las variables declaradas.
     //con el .val() se obtiene el valor del los input
@@ -861,6 +858,29 @@ function salir() {
 }
 
 
+// -------------combobox trabajador---------------
+function cargaCargo() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/CargaCargo",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#CargoTrabajador").html(ruta, datos);
+            });
+}
+
+function cargaSucursal() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaSucursal",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#SucursalTrabajador").html(ruta, datos);
+            });
+}
+
+
+
 
 //-----------------cmbox clientes------------------------------
 function CargaRegion() {
@@ -893,6 +913,7 @@ function CargaComuna() {
             });
 
 }
+
 
 //-----------------cmbox facturas------------------------------
 
@@ -935,6 +956,17 @@ function cargaMaterial() {
                 $("#MaterialFactura").html(ruta, datos);
             });
 }
+function cargaTrabajador() {
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/cargaTrabajador",
+            {},
+            function (ruta, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome
+                $("#TrabajadorFactura").html(ruta, datos);
+            });
+
+
+}
 //   ----------------cmbox flujo caja-----------------
 function cargaSucursalFlujoCaja() {
     //llama a la funcion que se encuentra el el welcome
@@ -967,7 +999,8 @@ function cargaSucursalUsuarios() {
             });
 }
 
-function cargaCargoUsuarios() {
+function cargaRolUsuario() {
+
     //llama a la funcion que se encuentra el el welcome
     $.post(base_url + "Welcome/CargaRol",
             {},
@@ -987,19 +1020,6 @@ function cargaUsuario() {
             });
 }
 
-//-----------tabla trabajador------------------
-
-function tablaTrabajador() {
-    //llama a la funcion que se encuentra el el welcome
-    $.post(base_url + "Welcome/tablaTrabajador",
-            {},
-            function (ruta, datos) {
-                //Se cargan los datos que vienen de cargarCargo del welcome
-
-                $("#tablaTrabajador").html(ruta, datos);
-            });
-}
-
 
 //------------factura-------------------
 function cantidades() {
@@ -1014,21 +1034,21 @@ function cantidades() {
     var tot = cant * val;
     $(".preview-cantTemporal").text(tot);
 }
-
-function retornoValor() {
-    var cant = 0;
-    $('.input-cantidad').each(function () {
-        cant = parseFloat($(this).text());
-    });
-    var val = 0;
-    $('.input-valor').each(function () {
-        val = parseFloat($(this).text());
-    });
-    var tot = cant * val;
-    $(".preview-cantTemporal").text(tot);
-    var totalParcial= $(".preview-cantTemporal").text(tot);
-    return totalParcial;
-}
+//
+//function retornoValor() {
+//    var cant = 0;
+//    $('.input-cantidad').each(function () {
+//        cant = parseFloat($(this).text());
+//    });
+//    var val = 0;
+//    $('.input-valor').each(function () {
+//        val = parseFloat($(this).text());
+//    });
+//    var tot = cant * val;
+//    $(".preview-cantTemporal").text(tot);
+//    var totalParcial= $(".preview-cantTemporal").text(tot);
+//    return totalParcial;
+//}
 
 function calc_total() {
     var sum = 0;
@@ -1037,7 +1057,36 @@ function calc_total() {
     });
     $(".preview-totalTempotal").text(sum);
 }
+function calc_iva(){
+   var iva =0;
+  $('.input-iva').each(function(){
+        iva =  calc_total * 19 / 100($(this).text());
+    });
+    $(".preview-iva").text(iva);
+}
 
 
 
+//    tabla trabajador------------------
+function actualizarTablaTrabajador() {
 
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/actualizaTablaTrabajador",
+            {},
+            function (pagina, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome                
+                $(".divCrud").html(pagina, datos);
+            });
+}
+
+function eliminarTrabajador(ruttrabajador) {
+    $.post(base_url + "Welcome/eliminarTrabajador",
+            {ruttrabajador: ruttrabajador},
+            function () {
+                actualizarTablaTrabajador();
+
+            }
+    );
+
+
+}
