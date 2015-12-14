@@ -100,7 +100,11 @@ class Welcome extends CI_Controller {
     }
 
     function vistaFactura() {
-        $this->load->view('factura');
+        if ($this->session->userdata("login")) {
+            $this->load->view('factura');
+        } else {
+            redirect(base_url());
+        }
     }
 
     function vistaMaterial() {
@@ -161,7 +165,7 @@ class Welcome extends CI_Controller {
 //    ------------tabla trabajador------------------------------------
 
     function tablaTrabajador() {
-        if ($this->session->userdata("login")) {            
+        if ($this->session->userdata("login")) {
             $data = $this->modelo->tablaTrabajador();
             $datos['cantidad'] = $data->num_rows();
             $datos['trabajador'] = $data->result();

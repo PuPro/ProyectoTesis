@@ -8,10 +8,10 @@
         <link href="<?= base_url() ?>../Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?= base_url() ?>../css/style.css" rel="stylesheet">
         <link href="<?= base_url() ?>../css/container.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="<?=base_url()?>../css/jquery-ui.css">
-        <script type="text/javascript" src="<?=base_url()?>../js/jquery.js"></script>
-        <script type="text/javascript" src="<?=base_url()?>../js/jquery-ui.js"></script>
-        
+        <link rel="stylesheet" type="text/css" href="<?= base_url() ?>../css/jquery-ui.css">
+        <script type="text/javascript" src="<?= base_url() ?>../js/jquery.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>../js/jquery-ui.js"></script>
+
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>../css/container.css">
 
         <script type="text/javascript">

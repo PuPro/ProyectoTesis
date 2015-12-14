@@ -3,10 +3,10 @@
         <div class="bs-example">
             <ul class="nav nav-pills">
                 <li class="active"><a href="#">INICIO</a></li>
-                
+
                 <!--onclik llama a la funcion trabajador que se 
                 encuentran en el archivo funcion.js-->
-                
+
                 <li><a href="#" onclick="trabajador();" >TRABAJADOR</a></li>
                 <li><a href="#" onclick="cliente();">CLIENTE</a></li>
                 <li><a href="#" onclick="factura();">FACTURA</a></li>
@@ -20,13 +20,20 @@
                     </ul>
                 </li>
                 <li><a href="#" onclick="comparacion();">COMPARACION</a></li>
+
                 <!--        cerrar sesion-->
                 <li class="dropdown pull-right">
-                    <a  href="" class="dropdown-toggle" id="btn_salir">CERRAR SESION</a>
+                    <a  href="#" class="dropdown-toggle" id="btn_salir"><label>CERRAR SESION</label>                     
+                    </a>
                 </li>
             </ul>
+            <label class="dropdown pull-right">Bienvenido(a) <?php echo $this->session->userdata('nombre'); ?>
+                <?php echo $this->session->userdata('apellido'); ?></label>
         </div>
     </div>
+
+
+
 
     <div class="aplicacion">
     </div>
