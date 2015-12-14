@@ -23,12 +23,13 @@
                 <td><?php echo $fila->telefono ?></td>
                 <td><?php echo $fila->fecha_ingreso ?></td>
                 <td><?php echo $fila->estado ?></td>
+                <td><?php echo $fila->cargo_idcargo ?></td>
                 <td><?php echo $fila->empresa_rutempresa ?></td>
                 <td>
-                    <button id='editar<?php $i ?>' onclick="editar(<?php echo $fila->ruttrabajador; ?>)">Editar</button>
+                    <button id='editar<?php echo $i ?>' onclick="editar(<?php echo $fila->ruttrabajador?>);">Editar</button>
                 </td>
                 <td>
-                    <button id='eliminar<?php $i ?>' onclick="eliminar(<?php echo $fila->ruttrabajador; ?>)">Eliminar</button>
+                    <button id='eliminar<?php echo $i ?>' onclick="eliminarTrabajador(<?php echo $fila->ruttrabajador?>);">Eliminar</button>
                 </td>
             </tr>
 

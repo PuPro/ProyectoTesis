@@ -66,13 +66,12 @@ class modelo extends CI_Model {
         $this->db->select('*');
         return $this->db->get('trabajador');
     }
-function eliminaTrabajador($ruttrabajador){
-    $this->db->where('ruttrabajador',$ruttrabajador);
-    $this->db->delete("trabajador");
-}
-    
-    
-    
+
+    function eliminaTrabajador($ruttrabajador) {
+        $this->db->where('ruttrabajador', $ruttrabajador);
+        $this->db->delete("trabajador");
+    }
+
 //    ------------------------facturas--------------------------
 
     function cargaCliente() {
@@ -181,13 +180,13 @@ function eliminaTrabajador($ruttrabajador){
 
 }
 
-//-----------------admin---------------------
+//-----------------admin usuario---------------------
 
 function CargaRol() {
-        //Consulta a la base de datos a ña tabla rol
-        $this->db->select('*');
-        return $this->db->get('rol');
-    }
+    //Consulta a la base de datos a ña tabla rol
+    $this->db->select('*');
+    return $this->db->get('rol');
+}
 
 function GuardarUsuario($RutUsuario, $NombresUsuario, $ApellidoUsuario, $RolUsuario, $SucursalUsuario, $contraseñaUsuario) {
 
@@ -209,7 +208,7 @@ function GuardarUsuario($RutUsuario, $NombresUsuario, $ApellidoUsuario, $RolUsua
     endif;
 }
 
-
+//----------------------admin empresa------------
 function GuardarEmpresa($RutEmpresa, $NombresEmpresa, $DireccionEmpresa, $TelefonoEmpresa, $CorreoElectronicoEmpresa) {
 
     $this->db->select('rutusuario');
@@ -220,7 +219,7 @@ function GuardarEmpresa($RutEmpresa, $NombresEmpresa, $DireccionEmpresa, $Telefo
             'rutusuario' => $RutEmpresa,
             'nombre' => $NombresEmpresa,
             'apellido' => $DireccionEmpresa,
-            'Rol_idRol' => $TelefonoEmpresa,       
+            'Rol_idRol' => $TelefonoEmpresa,
             'contraseña' => $CorreoElectronicoEmpresa,);
         $this->db->insert('empresa', $data);
         return 0;
@@ -228,8 +227,5 @@ function GuardarEmpresa($RutEmpresa, $NombresEmpresa, $DireccionEmpresa, $Telefo
         return 1;
     endif;
 }
-
-
-
 ?>
 

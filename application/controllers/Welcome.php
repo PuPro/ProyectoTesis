@@ -16,39 +16,8 @@ class Welcome extends CI_Controller {
         $this->load->view('footer');
     }
 
-    //La funcion llama al modelo
-    function CargaCargo() {
-
-        //Se llama al modelo. En el modelo se buscan los cargos y se guardan en 
-        //el arreglo cargo
-        $datos['cargo'] = $this->modelo->CargaCargo()->result();
-        $this->load->view('cargo', $datos);
-    }
-
-    function cargaSucursal() {
-        $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
-        $this->load->view('sucursal', $datos);
-    }
-
-    function btnuevotrabajador() {
-        $rutTrabajador = $this->input->post('Rut');
-        $nombres = $this->input->post('Nombres');
-        $apellidos = $this->input->post('Apellidos');
-        $telefono = $this->input->post('Telefono');
-        $direccion = $this->input->post('Direccion');
-        $fechaIngreso = $this->input->post('FechaIngreso');
-        $estado = $this->input->post('Estado');
-        $IDCargo = $this->input->post('Cargo');
-        $rutEmpresa = $this->input->post('Sucursal');
-        $valor = 1;
-
-        if ($this->modelo->GuardarTrabajador
-                        ($rutTrabajador, $nombres, $apellidos, $telefono, $direccion, $fechaIngreso, $estado, $IDCargo, $rutEmpresa) == 0) {
-            $valor = 0;
-        }
-        //Se imprime la variable valor enviandolo al archivo funcion
-        echo json_encode(array('valor' => $valor));
-    }
+    
+//------------------loguin-------------
 
     function validaLogin() {
         $data['rol'] = 0;
@@ -86,7 +55,7 @@ class Welcome extends CI_Controller {
         echo json_encode(array("mensaje" => $msj));
     }
 
-//    cargar menu usuario
+//  -------------  cargar menu usuario vistas----------
     function vistaTrabajador() {
         $this->load->view('trabajador');
     }
@@ -119,7 +88,7 @@ class Welcome extends CI_Controller {
         $this->load->view('comparacion');
     }
 
-//    cargar menu admin
+//   -------- cargar menu admin vstas------------
 
     function vistaUsuario() {
         $this->load->view('usuario');
@@ -175,16 +144,48 @@ class Welcome extends CI_Controller {
         echo json_encode(array('valor' => $valor));
     }
 
-//    ------------tabla trabajador------------------------------------
+//    ------------ trabajador------------------------------------
+    function CargaCargo() {
+
+        //Se llama al modelo. En el modelo se buscan los cargos y se guardan en 
+        //el arreglo cargo
+        $datos['cargo'] = $this->modelo->CargaCargo()->result();
+        $this->load->view('cargo', $datos);
+    }
+
+    function cargaSucursal() {
+        $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
+        $this->load->view('sucursal', $datos);
+    }
+
+    function btnuevotrabajador() {
+        $rutTrabajador = $this->input->post('Rut');
+        $nombres = $this->input->post('Nombres');
+        $apellidos = $this->input->post('Apellidos');
+        $telefono = $this->input->post('Telefono');
+        $direccion = $this->input->post('Direccion');
+        $fechaIngreso = $this->input->post('FechaIngreso');
+        $estado = $this->input->post('Estado');
+        $IDCargo = $this->input->post('Cargo');
+        $rutEmpresa = $this->input->post('Sucursal');
+        $valor = 1;
+
+        if ($this->modelo->GuardarTrabajador
+                        ($rutTrabajador, $nombres, $apellidos, $telefono, $direccion, $fechaIngreso, $estado, $IDCargo, $rutEmpresa) == 0) {
+            $valor = 0;
+        }
+        //Se imprime la variable valor enviandolo al archivo funcion
+        echo json_encode(array('valor' => $valor));
+    }
 
     function actualizaTablaTrabajador() {
-        $datos=  $this->modelo->cargarTablaTrabajadores();
+        $datos = $this->modelo->cargarTablaTrabajadores();
         $data['cantidad'] = $datos->num_rows();
         $data['resultado'] = $datos->result();
         $this->load->view('tablaTrabajador', $data);
     }
-    
-    function eliminaTrabajador(){
+
+    function eliminarTrabajador() {
         $ruttrabajador = $this->input->post("ruttrabajador");
         $this->modelo->eliminaTrabajador($ruttrabajador);
     }
