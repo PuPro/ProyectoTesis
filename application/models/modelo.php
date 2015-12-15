@@ -61,18 +61,10 @@ class modelo extends CI_Model {
         endif;
     }
 
-    function cargarTablaTrabajadores() {
-        //Consulta a la base de datos añade tabla 
-        $this->db->select('*');
-        return $this->db->get('trabajador');
-        
-    }
-
-    function eliminaTrabajador($ruttrabajador) {
-        $this->db->where('ruttrabajador', $ruttrabajador);
-        $this->db->delete("trabajador");
-    }
-
+//    function eliminaTrabajador($ruttrabajador) {
+//        $this->db->where('ruttrabajador', $ruttrabajador);
+//        $this->db->delete("trabajador");
+//    }
 //    ------------------------facturas--------------------------
 
     function cargaCliente() {
@@ -92,36 +84,37 @@ class modelo extends CI_Model {
         $this->db->select('*');
         return $this->db->get('material');
     }
- function cargaTrabajador() {
+
+    function cargaTrabajador() {
         //Consulta a la base de datos añade tabla 
-        $this->db->select('ruttrabajador, nombre');
+        $this->db->select('*');
+        $this->db->where('cargo_idcargo', 1);
         return $this->db->get('trabajador');
     }
-function botonGuardarfactura(
-$numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
-$this->db->select('idfactura');
- $this->db->where('numeroFactura', $numeroFactura);
-$cantidad = $this->db->get('factura')->num_rows();
-if ($cantidad == 0):
-        $data = array(
-    'numerofactura'=> $numeroFactura,
-    'fecha_emision'=>$Fecha_ingresoFactura,
-    'fecha_vencimiento'=>$Fecha_vencimientoFactura,
-    'valorneto'=>$valorneto,
-    'valortotal'=>$valortotal,
-    'iva'=>$iva,
-    'cliente_rutcliente'=>$clienteFactura,
-    'empresa_rutempresa'=>$SucursalFactura,
-    'usuario_rutusuario'=>$rutusuario,
-    'proveedor_rutproveedor'=>$proveedorFactura,);
-$this->db->insert('factura', $data);
-  return 0;
-    else:
-        return 1;
-    endif;
-}
 
-
+    function botonGuardarfactura(
+    $numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
+        $this->db->select('idfactura');
+        $this->db->where('numeroFactura', $numeroFactura);
+        $cantidad = $this->db->get('factura')->num_rows();
+        if ($cantidad == 0):
+            $data = array(
+                'numerofactura' => $numeroFactura,
+                'fecha_emision' => $Fecha_ingresoFactura,
+                'fecha_vencimiento' => $Fecha_vencimientoFactura,
+                'valorneto' => $valorneto,
+                'valortotal' => $valortotal,
+                'iva' => $iva,
+                'cliente_rutcliente' => $clienteFactura,
+                'empresa_rutempresa' => $SucursalFactura,
+                'usuario_rutusuario' => $rutusuario,
+                'proveedor_rutproveedor' => $proveedorFactura,);
+            $this->db->insert('factura', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
 
     function Guardarfactura(
     $numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) {
@@ -192,8 +185,6 @@ $this->db->insert('factura', $data);
 
     function GuardarFlujoCaja($Fecha_ingresoFlujor, $ITEMFlujo, $SucursalFlujo, $MontoTotalFlujo, $DescripcionFlujo) {
 
-        $this->db->select('fecha_creacion');
-        $this->db->where('fecha_creacion', $Fecha_ingresoFlujor);
         $cantidad = $this->db->get('flujo')->num_rows();
         if ($cantidad == 0):
             $data = array(
@@ -258,5 +249,43 @@ function GuardarEmpresa($RutEmpresa, $NombresEmpresa, $DireccionEmpresa, $Telefo
         return 1;
     endif;
 }
+
+function GuardarFacturaTrabajador($idfactura, $ruttrabajador) {
+    $this->db->select('idfactura');
+    $this->db->where('idfactura', $idfactura);
+    $cantidad = $this->db->get('trabajador_factura')->num_rows();
+    if ($cantidad == 0):
+        $data = array(
+            'trabajador_ruttrabajador' => $idfactura,
+            'factura_idfactura' => $ruttrabajador,);
+        $this->db->insert('trabajador_factura', $data);
+        return 0;
+    else:
+        return 1;
+    endif;
+}
+
+//------------------ filtro tablas-----------------------
+
+function cargarTablaTrabajadores() {
+    //Consulta a la base de datos añade tabla 
+    $this->db->select('*');
+    return $this->db->get('trabajador');
+}
+
+function cargarTablaClientes() {
+    //Consulta a la base de datos añade tabla 
+    $this->db->select('*');
+    return $this->db->get('cliente');
+}
+
+function cargarTablaMateriales() {
+    //Consulta a la base de datos añade tabla 
+    $this->db->select('*');
+    return $this->db->get('material');
+}
+
+
+
 ?>
 

@@ -118,11 +118,13 @@ class Welcome extends CI_Controller {
         $datos['facturaClientes'] = $this->modelo->cargaCliente()->result();
         $this->load->view('facturaClientes', $datos);
     }
-    function cargaTrabajador(){
+
+    function cargaTrabajador() {
         $datos['trabajador'] = $this->modelo->cargaTrabajador()->result();
         $this->load->view('cmbTrabajador', $datos);
     }
-            function cargaSucursalFactura() {
+
+    function cargaSucursalFactura() {
         $datos['sucursal'] = $this->modelo->CargaSucursal()->result();
         $this->load->view('sucursal', $datos);
     }
@@ -136,9 +138,6 @@ class Welcome extends CI_Controller {
         $datos['cargaMaterial'] = $this->modelo->cargaMaterial()->result();
         $this->load->view('cargaMaterial', $datos);
     }
-
-//    ------------tabla trabajador------------------------------------
-
 
     function btnuevofactura() {
         $numeroFactura = $this->input->post('NumeroFactura');
@@ -155,6 +154,18 @@ class Welcome extends CI_Controller {
 
         if ($this->modelo->Guardarfactura
                         ($numeroFactura, $Fecha_ingresoFactura, $Fecha_vencimientoFactura, $valorneto, $valortotal, $iva, $clienteFactura, $SucursalFactura, $rutusuario, $proveedorFactura) == 0) {
+            $valor = 0;
+        }
+        //Se imprime la variable valor enviandolo al archivo funcion
+        echo json_encode(array('valor' => $valor));
+    }
+
+    function nuevoTrabajador_factura() {
+
+        $RutEmpresa = $this->input->post('NumeroFactura');
+        $NombresEmpresa = $this->input->post('TrabajadorFactura');
+        if ($this->modelo->GuardarFacturaTrabajador
+                        ($idfactura, $ruttrabajador) == 0) {
             $valor = 0;
         }
         //Se imprime la variable valor enviandolo al archivo funcion
@@ -195,24 +206,23 @@ class Welcome extends CI_Controller {
         echo json_encode(array('valor' => $valor));
     }
 
+//    ------------tabla trabajador------------------------------------
     function actualizaTablaTrabajador() {
 
-            if ($this->session->userdata("login")) {
-                $datos = $this->modelo->cargarTablaTrabajadores();
-                $data['cantidad'] = $datos->num_rows();
-                $data['resultado'] = $datos->result();
-                $this->load->view('tablaTrabajador', $data);
-            } else {
-                redirect(base_url());
-            }
-        
-
+        if ($this->session->userdata("login")) {
+            $datos = $this->modelo->cargarTablaTrabajadores();
+            $data['cantidad'] = $datos->num_rows();
+            $data['resultado'] = $datos->result();
+            $this->load->view('tablaTrabajador', $data);
+        } else {
+            redirect(base_url());
+        }
     }
 
-    function eliminarTrabajador() {
-        $ruttrabajador = $this->input->post("ruttrabajador");
-        $this->modelo->eliminaTrabajador($ruttrabajador);
-    }
+//    function eliminarTrabajador() {
+//        $ruttrabajador = $this->input->post("ruttrabajador");
+//        $this->modelo->eliminaTrabajador($ruttrabajador);
+//    }
 
 //    -------------------cmboxcliente------------
 
@@ -252,6 +262,19 @@ class Welcome extends CI_Controller {
         //Se imprime la variable valor enviandolo al archivo funcion
         echo json_encode(array('valor' => $valor));
     }
+    
+//    ------------- tabla clientes-------------------------
+      function actualizaTablaClientes() {
+
+        if ($this->session->userdata("login")) {
+            $datos = $this->modelo->cargarTablaClientes();
+            $data['cantidad'] = $datos->num_rows();
+            $data['resultado'] = $datos->result();
+            $this->load->view('tablaClientes', $data);
+        } else {
+            redirect(base_url());
+        }
+    }
 
 //    -----------------------flujo caja----------------
 
@@ -280,6 +303,23 @@ class Welcome extends CI_Controller {
         //Se imprime la variable valor enviandolo al archivo funcion
         echo json_encode(array('valor' => $valor));
     }
+    
+    
+//    -----------------------lista materiales--------------------------
+    
+      function actualizaTablaMaterial() {
+
+        if ($this->session->userdata("login")) {
+            $datos = $this->modelo->cargarTablaMateriales();
+            $data['cantidad'] = $datos->num_rows();
+            $data['resultado'] = $datos->result();
+            $this->load->view('tablaMaterial', $data);
+        } else {
+            redirect(base_url());
+        }
+    }
+    
+    
 
 //    --------------------administrador---------------
 

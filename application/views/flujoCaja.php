@@ -5,13 +5,14 @@
             <div class="panel panel-default" >
                 <div class="panel-body form-horizontal payment-form" name="formulario">
                     <div class="form-group" >
-                        <div class="col-sm-6">
-                            <label for="date" class="col-sm-3 control-label">Fecha *:</label>
-                            <div class="col-sm-9">
-                                <input type="date" class="form-control" 
-                                       id="Fecha_ingresoFlujo" name="Fecha_ingresoFlujor" required="true">
-                            </div> 
+ 
+                            <div class="col-sm-6">
+                        <label for="date" class="col-sm-3 control-label">Fecha  *:</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" 
+                                   id="Fecha_ingresoFlujor" name="Fecha_ingresoFlujor" required="true">
                         </div>
+                    </div> 
                         <div class="col-sm-6">
                             <label for="status" class="col-sm-3 control-label">ITEM *:</label>
                             <div class="col-sm-9">
@@ -42,8 +43,8 @@
                         <label for="concept" class="col-sm-3 control-label">Descripcion :</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" type="textarea" id="DescripcionFlujo" 
-                                      placeholder="Ingrese descripcion..." name="DescripcionFlujo" 
-                                      maxlength="" rows="10">
+                                       name="DescripcionFlujo" 
+                                      maxlength=" " rows="10">
                             </textarea>
                         </div>
                     </div>  

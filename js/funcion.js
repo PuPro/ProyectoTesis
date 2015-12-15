@@ -12,49 +12,6 @@ $(document).ready(function () {
     });
 
 
-    /*---Filtro---*/
-    $('.filterable .btn-filter').click(function () {
-        var $panel = $(this).parents('.filterable'),
-                $filters = $panel.find('.filters input'),
-                $tbody = $panel.find('.table tbody');
-        if ($filters.prop('disabled') == true) {
-            $filters.prop('disabled', false);
-            $filters.first().focus();
-        } else {
-            $filters.val('').prop('disabled', true);
-            $tbody.find('.no-result').remove();
-            $tbody.find('tr').show();
-        }
-    });
-
-    $('.filterable .filters input').keyup(function (e) {
-        /* Ignore tab key */
-        var code = e.keyCode || e.which;
-        if (code == '9')
-            return;
-        /* Useful DOM data and selectors */
-        var $input = $(this),
-                inputContent = $input.val().toLowerCase(),
-                $panel = $input.parents('.filterable'),
-                column = $panel.find('.filters th').index($input.parents('th')),
-                $table = $panel.find('.table'),
-                $rows = $table.find('tbody tr');
-        /* Dirtiest filter function ever ;) */
-        var $filteredRows = $rows.filter(function () {
-            var value = $(this).find('td').eq(column).text().toLowerCase();
-            return value.indexOf(inputContent) === -1;
-        });
-        /* Clean previous no-result if exist */
-        $table.find('tbody .no-result').remove();
-        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-        $rows.show();
-        $filteredRows.hide();
-        /* Prepend no-result row if all rows are filtered */
-        if ($filteredRows.length === $rows.length) {
-            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
-        }
-    });
-
 });
 
 
@@ -110,6 +67,7 @@ function trabajador() {
                 //Carga de combobox
                 cargaCargo();
                 cargaSucursal();
+                actualizarTablaTrabajador();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -119,11 +77,32 @@ function trabajador() {
 
                 });
 
-                $("#cargartablaTrabajador").button().click(function () {
-                    actualizarTablaTrabajador();
 
+
+
+                /*---Filtro---*/
+                $('.filterable .btn-filter').click(function () {
+                    var $panel = $(this).parents('.filterable'),
+                            $filters = $panel.find('.filters input'),
+                            $tbody = $panel.find('.table');
+                    actualizarTablaTrabajador();
+                    if ($filters.prop('disabled') == true) {
+                        $filters.prop('disabled', false);
+                        $filters.first().focus();
+                    } else {
+                        $filters.val('').prop('disabled', true);
+                        $tbody.find('.no-result').remove();
+                        $tbody.find('tr').show();
+                    }
                 });
+
+
+
+
             });
+
+
+
 }
 
 function btnaagregartrabajador() {
@@ -214,10 +193,17 @@ function btnaagregartrabajador() {
                     } else {
                         $("#modalMensaje").html("<p class='msjOk'>Trabajador agregado correctamente</p>");
                         trabajador();
+
+
                     }
                     $("#modalMensaje").dialog("open");
                 }, 'json'//Formato en el que se enviaran los datos
                 );
+
+
+
+
+
     }
 }
 
@@ -232,6 +218,7 @@ function cliente() {
                 CargaRegion();
                 cargaSucursalCliente();
                 CargaComuna();
+                actualizarTablaClientes();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
@@ -239,6 +226,22 @@ function cliente() {
                 $("#btnagregarCliente").button().click(function () {
                     btnaagregarcliente();
                 });
+                /*---Filtro---*/
+                $('.filterable .btn-filter').click(function () {
+                    var $panel = $(this).parents('.filterable'),
+                            $filters = $panel.find('.filters input'),
+                            $tbody = $panel.find('.table');
+                    actualizarTablaClientes();
+                    if ($filters.prop('disabled') == true) {
+                        $filters.prop('disabled', false);
+                        $filters.first().focus();
+                    } else {
+                        $filters.val('').prop('disabled', true);
+                        $tbody.find('.no-result').remove();
+                        $tbody.find('tr').show();
+                    }
+                });
+
 
 
             });
@@ -319,16 +322,15 @@ function btnaagregarcliente() {
                     Comuna: Comuna,
                     Sucursal: Sucursal
                 },
-
-        function (datos) {
-            if (datos.valor == 1) {
-                $("#modalMensaje").html("<p class='msjError'>Cliente ya existente</p>");
-            } else {
-                $("#modalMensaje").html("<p class='msjOk'>Cliente agregado correctamente</p>");
-                cliente();
-            }
-            $("#modalMensaje").dialog("open");
-        }, 'json'//Formato en el que se enviaran los datos
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Cliente ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Cliente agregado correctamente</p>");
+                        cliente();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
                 );
     }
 }
@@ -351,9 +353,12 @@ function factura() {
                 $(".aplicacion").html(pagina);
                 $("#btnAgregarFactura").button().click(function () {
                     btnAgregarDetallefactura();
+
                 });
                 $("#btnFinalizarFactura").button().click(function () {
+
                     btnAgregarFactura();
+                    nuevoTrabajador_factura();
                 });
             });
 }
@@ -366,6 +371,7 @@ function btnAgregarDetallefactura() {
     var material = $("#MaterialFactura").val();
     var cantidad = $("#cantidad").val();
     var valor = $("#valor").val();
+    var total = $("#total").val();
     var mensaje = "<strong id='tituloError'>Error:</strong> <br>";
     var error = 0;
 
@@ -392,12 +398,15 @@ function btnAgregarDetallefactura() {
     } else {
 
         $(document).on('click', '.input-remove-row', function () {
+//            ----------------- descuento total--------------
             var tr = $(this).closest('tr');
             tr.fadeOut(200, function () {
                 tr.remove();
                 calc_total();
+                calc_iva();
                 $("#btnagregarFactura").button().click(function () {
                     btnaagregarfactura();
+
                 });
 
 
@@ -409,7 +418,7 @@ function btnAgregarDetallefactura() {
         form_data["materialFactura"] = $('.payment-form #MaterialFactura option:selected').val();
         form_data["cantidad"] = parseFloat($('.payment-form input[name="cantidad"]').val());
         form_data["valor"] = parseFloat($('.payment-form input[name="valor"]').val());
-       form_data["total"] = parseFloat($('.payment-form input[name="total"]').val());
+        form_data["total"] = retornoValor();
         form_data["remove-row"] = '<span class="glyphicon glyphicon-remove"></span>';
         var row = $('<tr></tr>');
         $.each(form_data, function (type, value) {
@@ -418,6 +427,7 @@ function btnAgregarDetallefactura() {
         $('.preview-table > tbody:last').append(row);
         calc_total();
         cantidades();
+        calc_iva();
     }
 }
 function isNumeric(numero) {
@@ -431,7 +441,7 @@ function btnaAgregarfactura() {
     var FechaVencimiento = $("#Fecha_vencimientoFactura").val();
     var Neto = $("#valorneto").val();
     var Total = $("#valortotal").val();
-    var Iva = $("iva").val();
+    var Iva = $("#iva").val();
     var Cliente = $("#clienteFactura").val();
     var Sucursal = $("#SucursalFactura").val();
     var RutUsuario = $("#rutusuario").val();
@@ -511,15 +521,15 @@ function btnaAgregarfactura() {
                     RutUsuario: RutUsuario,
                     Proveedor: Proveedor
                 },
-        function (datos) {
-            if (datos.valor == 1) {
-                $("#modalMensaje").html("<p class='msjError'>Factura ya existente</p>");
-            } else {
-                $("#modalMensaje").html("<p class='msjOk'>Factura agregado correctamente</p>");
-                factura();
-            }
-            $("#modalMensaje").dialog("open");
-        }, 'json'//Formato en el que se enviaran los datos
+                function (datos) {
+                    if (datos.valor == 1) {
+                        $("#modalMensaje").html("<p class='msjError'>Factura ya existente</p>");
+                    } else {
+                        $("#modalMensaje").html("<p class='msjOk'>Factura agregado correctamente</p>");
+                        factura();
+                    }
+                    $("#modalMensaje").dialog("open");
+                }, 'json'//Formato en el que se enviaran los datos
                 );
     }
 }
@@ -533,11 +543,39 @@ function material() {
             base_url + "Welcome/vistaMaterial",
             {},
             function (pagina) {
+                actualizaTablaMaterial();
                 //Carga archivos de respuestas que provengan de validaLogin
                 $(".aplicacion").hide();
                 $(".aplicacion").fadeIn(1000).delay(1000);
                 $(".aplicacion").html(pagina);
+                
+                
+             /*---Filtro---*/
+                $('.filterable .btn-filter').click(function () {
+                    var $panel = $(this).parents('.filterable'),
+                            $filters = $panel.find('.filters input'),
+                            $tbody = $panel.find('.table');
+                    actualizaTablaMaterial();
+                    if ($filters.prop('disabled') == true) {
+                        $filters.prop('disabled', false);
+                        $filters.first().focus();
+                    } else {
+                        $filters.val('').prop('disabled', true);
+                        $tbody.find('.no-result').remove();
+                        $tbody.find('tr').show();
+                    }
+                });
+            
+            
+            
             });
+
+
+
+
+
+
+
 }
 //flujocaja
 function flujoCaja() {
@@ -1034,21 +1072,13 @@ function cantidades() {
     var tot = cant * val;
     $(".preview-cantTemporal").text(tot);
 }
-//
-//function retornoValor() {
-//    var cant = 0;
-//    $('.input-cantidad').each(function () {
-//        cant = parseFloat($(this).text());
-//    });
-//    var val = 0;
-//    $('.input-valor').each(function () {
-//        val = parseFloat($(this).text());
-//    });
-//    var tot = cant * val;
-//    $(".preview-cantTemporal").text(tot);
-//    var totalParcial= $(".preview-cantTemporal").text(tot);
-//    return totalParcial;
-//}
+function retornoValor() {
+    var cant = parseFloat($('#cantidad').val() * $('#valor').val());
+    return cant;
+}
+
+
+
 
 function calc_total() {
     var sum = 0;
@@ -1057,17 +1087,27 @@ function calc_total() {
     });
     $(".preview-totalTempotal").text(sum);
 }
-function calc_iva(){
-   var iva =0;
-  $('.input-iva').each(function(){
-        iva =  calc_total * 19 / 100($(this).text());
+function calc_iva() {
+
+    var val = 0;
+    var iva = 0;
+    var total = 0;
+    $('.preview-totalTempotal').each(function () {
+        val = parseFloat($(this).text());
+        iva = val * 0.19;
     });
     $(".preview-iva").text(iva);
+
+//    --------calcular total total----
+    total = iva + val;
+    $(".preview-totalTotal").text(total);
 }
 
 
 
-//    tabla trabajador------------------
+
+
+// --------------tabla trabajador------------------
 function actualizarTablaTrabajador() {
 
     //llama a la funcion que se encuentra el el welcome
@@ -1076,17 +1116,156 @@ function actualizarTablaTrabajador() {
             function (pagina, datos) {
                 //Se cargan los datos que vienen de cargarCargo del welcome                
                 $(".divCrud").html(pagina, datos);
+
+                $('.filterable .filters input').keyup(function (e) {
+                    /* Ignore tab key */
+                    var code = e.keyCode || e.which;
+                    if (code == '9')
+                        return;
+                    /* Useful DOM data and selectors */
+                    var $input = $(this),
+                            inputContent = $input.val().toLowerCase(),
+                            $panel = $input.parents('.filterable'),
+                            column = $panel.find('.filters th').index($input.parents('th')),
+                            $table = $panel.find('.table'),
+                            $rows = $table.find('tr');
+                    /* Dirtiest filter function ever ;) */
+                    var $filteredRows = $rows.filter(function () {
+                        var value = $(this).find('td').eq(column).text().toLowerCase();
+                        return value.indexOf(inputContent) === -1;
+                    });
+                    /* Clean previous no-result if exist */
+                    $table.find('tbody .no-result').remove();
+                    /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+                    $rows.show();
+                    $filteredRows.hide();
+                    /* Prepend no-result row if all rows are filtered */
+                    if ($filteredRows.length === $rows.length) {
+                        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
+                    }
+                });
+
+
+
             });
 }
 
-function eliminarTrabajador(ruttrabajador) {
-    $.post(base_url + "Welcome/eliminarTrabajador",
-            {ruttrabajador: ruttrabajador},
-            function () {
-                actualizarTablaTrabajador();
+//function eliminarTrabajador(ruttrabajador) {
+//    $.post(base_url + "Welcome/eliminarTrabajador",
+//            {ruttrabajador: ruttrabajador},
+//            function () {
+//                actualizarTablaTrabajador();
+//
+//            }
+//    );
 
-            }
-    );
+
+function nuevoTrabajador_factura() {
+    var NumeroFactura = $("#numeroFactura").val();
+    var TrabajadorFactura = $("#TrabajadorFactura").val();
+    $.post(base_url + "welcome/nuevoTrabajador_factura",
+            {
+                //Variable de color verde es como se debe recibier en el archivo php(funcion btnaagregartrabajador)
+                //Variable de color negra Es el valor capturado
+                NumeroFactura: NumeroFactura,
+                TrabajadorFactura: TrabajadorFactura,
+            },
+            'json'//Formato en el que se enviaran los datos
+            );
+}
 
 
+
+
+//-------------tabla clientes---------------
+
+function actualizarTablaClientes() {
+
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/actualizaTablaClientes",
+            {},
+            function (pagina, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome                
+                $(".divCrud").html(pagina, datos);
+
+//---------------- comienzo del filtro-----------------------
+                $('.filterable .filters input').keyup(function (e) {
+                    /* Ignore tab key */
+
+                    var code = e.keyCode || e.which;
+                    if (code == '9')
+                        return;
+                    /* Useful DOM data and selectors */
+                    var $input = $(this),
+                            inputContent = $input.val().toLowerCase(),
+                            $panel = $input.parents('.filterable'),
+                            column = $panel.find('.filters th').index($input.parents('th')),
+                            $table = $panel.find('.table'),
+                            $rows = $table.find('tr');
+                    /* Dirtiest filter function ever ;) */
+                    var $filteredRows = $rows.filter(function () {
+                        var value = $(this).find('td').eq(column).text().toLowerCase();
+                        return value.indexOf(inputContent) === -1;
+                    });
+                    /* Clean previous no-result if exist */
+                    $table.find('tbody .no-result').remove();
+                    /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+                    $rows.show();
+                    $filteredRows.hide();
+                    /* Prepend no-result row if all rows are filtered */
+                    if ($filteredRows.length === $rows.length) {
+                        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
+                    }
+                });
+
+
+
+            });
+}
+
+
+
+//----------------------tabla materiales--------------
+
+
+function actualizaTablaMaterial() {
+
+    //llama a la funcion que se encuentra el el welcome
+    $.post(base_url + "Welcome/actualizaTablaMaterial",
+            {},
+            function (pagina, datos) {
+                //Se cargan los datos que vienen de cargarCargo del welcome                
+                $(".divCrud").html(pagina, datos);
+
+                $('.filterable .filters input').keyup(function (e) {
+                    /* Ignore tab key */
+                    var code = e.keyCode || e.which;
+                    if (code == '9')
+                        return;
+                    /* Useful DOM data and selectors */
+                    var $input = $(this),
+                            inputContent = $input.val().toLowerCase(),
+                            $panel = $input.parents('.filterable'),
+                            column = $panel.find('.filters th').index($input.parents('th')),
+                            $table = $panel.find('.table'),
+                            $rows = $table.find('tr');
+                    /* Dirtiest filter function ever ;) */
+                    var $filteredRows = $rows.filter(function () {
+                        var value = $(this).find('td').eq(column).text().toLowerCase();
+                        return value.indexOf(inputContent) === -1;
+                    });
+                    /* Clean previous no-result if exist */
+                    $table.find('tbody .no-result').remove();
+                    /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+                    $rows.show();
+                    $filteredRows.hide();
+                    /* Prepend no-result row if all rows are filtered */
+                    if ($filteredRows.length === $rows.length) {
+                        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
+                    }
+                });
+
+
+
+            });
 }

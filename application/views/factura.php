@@ -125,7 +125,7 @@
                             <input type="number" class="form-control" id="valor" name="valor">
                         </div>
                     </div> 
-
+                        
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
                             <button type="submit" class="btn btn-default preview-add-button" id="btnAgregarFactura">
@@ -160,9 +160,9 @@
             </div>
             <div class="row text-right">
                 <div class="col-xs-12">
-                    <h4>Sub Total: <strong><span class="preview-totalTempotal"></span></strong></h4>
-                    <h4>IVA (19%): <strong><span class="preview-cantTemporal"></span></strong></h4>
-                    <h4>Total: <strong><span class=""></span></strong></h4> 
+                    <h4>Sub Total: <strong><span class="preview-totalTempotal" id="valorneto" name="valorneto" ></span></strong></h4>
+                    <h4>IVA (19%): <strong><span class="preview-iva" id="iva" name="iva" ></span></strong></h4>
+                    <h4>Total: <strong><span class="preview-totalTotal" id="valortotal" name="valortotal"></span></strong></h4> 
                 </div>
             </div>
             <div class="row">

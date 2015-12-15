@@ -104,7 +104,7 @@
 
 
 <div class="container">
-    <div class="col-sm-12"> 
+    <div class="col-sm-12 "> 
         <h2></h2>
         <!--busqueda-->
         <div class="row">
@@ -112,55 +112,15 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">CLIENTES</h3>
                     <div class="pull-right">
+                       
                         <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> BUSCAR </button>
                     </div>
                 </div>
-                <table class="table">   
-                    <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="Rut" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Nombres" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Apellidos" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Direccion" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Telefono" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Fecha ingreso" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Ciudad" disabled></th>
-
-
-                    </tr>
-                    <tr>
-                        <td>12345678-9</td>
-                        <td>jose jose</td>
-                        <td>madera madera</td>
-                        <td>99999999</td>
-                        <td>jd # 12</td>
-                        <td>12/12/12</td>
-                        <td>talca</td>
-
-                    </tr>
-                    <tr>
-                        <td>12345678-9</td>
-                        <td>jose jose</td>
-                        <td>madera madera</td>
-                        <td>99999999</td>
-                        <td>jd # 12</td>
-                        <td>12/12/12</td>
-                        <td>talca</td>
-
-
-                    </tr>
-                    <tr>
-                        <td>12345678-9</td>
-                        <td>jose jose</td>
-                        <td>madera madera</td>
-                        <td>99999999</td>
-                        <td>jd # 12</td>
-                        <td>12/12/12</td>
-                        <td>talca</td>
-
-                    </tr>
-                </table>
+                <div class="divCrud" id="divCrud">
+                    
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 
